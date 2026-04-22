@@ -1,456 +1,1947 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>미래정당 - 국민과 함께하는 새로운 내일</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary-color: #0b3d91;
-            --secondary-color: #1e88e5;
-            --text-dark: #333333;
-            --text-light: #ffffff;
-            --bg-light: #f4f7f6;
-            --bg-white: #ffffff;
-            --transition: all 0.3s ease;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>대한민국 대통령 이재명 | 청와대</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600;700&family=Noto+Sans+KR:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0A1628;
+    --deep-blue: #0D2147;
+    --royal: #1A3A6B;
+    --accent: #C8A96E;
+    --gold: #E4C07A;
+    --light-gold: #F5E5C0;
+    --white: #FAFAF8;
+    --muted: #8A9BB5;
+    --surface: #0F1E3D;
+    --card: #132040;
+    --text-light: #D4DCE8;
+    --taegeuk-red: #CD2E3A;
+    --taegeuk-blue: #003478;
+  }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Noto Sans KR', sans-serif;
-            scroll-behavior: smooth;
-        }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        body {
-            color: var(--text-dark);
-            background-color: var(--bg-light);
-            line-height: 1.6;
-        }
+  html { scroll-behavior: smooth; }
 
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
+  body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background: var(--navy);
+    color: var(--white);
+    overflow-x: hidden;
+  }
 
-        /* Header & Navigation */
-        header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
-            z-index: 1000;
-            padding: 15px 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+  /* ── CURSOR ── */
+  .cursor {
+    width: 8px; height: 8px;
+    background: var(--accent);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s;
+  }
+  .cursor-ring {
+    width: 32px; height: 32px;
+    border: 1px solid rgba(200,169,110,0.5);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: all 0.2s ease;
+  }
 
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 900;
-            color: var(--primary-color);
-            letter-spacing: -1px;
-        }
+  /* ── NOISE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
 
-        nav ul {
-            list-style: none;
-            display: flex;
-            gap: 30px;
-        }
+  /* ── HEADER ── */
+  header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    padding: 0 48px;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(10, 22, 40, 0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(200,169,110,0.12);
+    transition: all 0.3s;
+  }
 
-        nav a {
-            font-weight: 500;
-            color: var(--text-dark);
-            position: relative;
-            padding-bottom: 5px;
-            transition: var(--transition);
-        }
+  .header-logo {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    text-decoration: none;
+  }
 
-        nav a:hover {
-            color: var(--primary-color);
-        }
+  .logo-emblem {
+    width: 42px; height: 42px;
+    position: relative;
+  }
 
-        nav a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: 0;
-            left: 0;
-            background-color: var(--primary-color);
-            transition: var(--transition);
-        }
+  .logo-emblem svg { width: 100%; height: 100%; }
 
-        nav a:hover::after {
-            width: 100%;
-        }
+  .logo-text {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
 
-        .login-btn {
-            background-color: var(--primary-color);
-            color: var(--text-light);
-            padding: 8px 20px;
-            border-radius: 20px;
-            font-weight: 500;
-            transition: var(--transition);
-        }
+  .logo-text .ko {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--white);
+    letter-spacing: 0.05em;
+  }
 
-        .login-btn:hover {
-            background-color: var(--secondary-color);
-            color: var(--text-light);
-        }
+  .logo-text .en {
+    font-size: 10px;
+    font-weight: 300;
+    color: var(--muted);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
 
-        /* Hero Section */
-        #home {
-            height: 100vh;
-            background: linear-gradient(rgba(11, 61, 145, 0.7), rgba(30, 136, 229, 0.7)), url('file:///C:/Users/yhgo/.gemini/antigravity/brain/0cc0bfd6-189e-4902-9982-eef0784d3121/hero_bg_1776829526743.png') center/cover;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            color: var(--text-light);
-            padding: 0 20px;
-            margin-top: 60px;
-        }
+  nav {
+    display: flex;
+    align-items: center;
+    gap: 36px;
+  }
 
-        #home h2 {
-            font-size: 4rem;
-            font-weight: 900;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-            animation: fadeInDown 1s ease;
-        }
+  nav a {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--text-light);
+    text-decoration: none;
+    letter-spacing: 0.08em;
+    position: relative;
+    transition: color 0.3s;
+  }
 
-        #home p {
-            font-size: 1.5rem;
-            font-weight: 300;
-            margin-bottom: 40px;
-            animation: fadeInUp 1s ease 0.5s both;
-        }
+  nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0; right: 0;
+    height: 1px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+  }
 
-        /* Sections General */
-        section {
-            padding: 80px 10%;
-        }
+  nav a:hover { color: var(--accent); }
+  nav a:hover::after { transform: scaleX(1); transform-origin: left; }
 
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--primary-color);
-            margin-bottom: 50px;
-            position: relative;
-        }
+  .header-cta {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
 
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 50px;
-            height: 4px;
-            background: var(--secondary-color);
-            margin: 15px auto 0;
-            border-radius: 2px;
-        }
+  .btn-outline {
+    padding: 8px 20px;
+    border: 1px solid rgba(200,169,110,0.4);
+    color: var(--accent);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    background: transparent;
+    transition: all 0.3s;
+    font-family: 'Noto Sans KR', sans-serif;
+  }
 
-        /* Policy & News Cards */
-        .card-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
+  .btn-outline:hover {
+    background: rgba(200,169,110,0.1);
+    border-color: var(--accent);
+  }
 
-        .card {
-            background: var(--bg-white);
-            border-radius: 12px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            transition: var(--transition);
-            border-top: 5px solid var(--secondary-color);
-            cursor: pointer;
-        }
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
 
-        .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
-            border-top-color: var(--primary-color);
-        }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 65% 40%, rgba(26,58,107,0.6) 0%, transparent 65%),
+      radial-gradient(ellipse 50% 80% at 20% 60%, rgba(13,33,71,0.8) 0%, transparent 60%),
+      linear-gradient(160deg, #06101F 0%, #0A1628 40%, #0D1F3C 100%);
+  }
 
-        .card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-            color: var(--primary-color);
-        }
+  /* Taegeuk geometric decoration */
+  .hero-geo {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 52%;
+    overflow: hidden;
+  }
 
-        .card p {
-            color: #666;
-            font-size: 1rem;
-        }
+  .geo-circle {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid rgba(200,169,110,0.08);
+    animation: slowSpin 60s linear infinite;
+  }
 
-        /* News Table */
-        .news-table {
-            width: 100%;
-            border-collapse: collapse;
-            background: var(--bg-white);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            border-radius: 8px;
-            overflow: hidden;
-        }
+  .geo-circle:nth-child(1) { width: 700px; height: 700px; top: -100px; right: -100px; }
+  .geo-circle:nth-child(2) { width: 500px; height: 500px; top: 50px; right: 50px; border-color: rgba(200,169,110,0.05); animation-direction: reverse; animation-duration: 45s; }
+  .geo-circle:nth-child(3) { width: 300px; height: 300px; top: 150px; right: 150px; border-color: rgba(200,169,110,0.1); }
 
-        .news-table th, .news-table td {
-            padding: 15px 20px;
-            text-align: center;
-            border-bottom: 1px solid #eee;
-        }
+  @keyframes slowSpin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
 
-        .news-table th {
-            background-color: var(--primary-color);
-            color: var(--text-light);
-            font-weight: 500;
-        }
+  .hero-portrait {
+    position: absolute;
+    right: 6%;
+    bottom: 0;
+    height: 88%;
+    opacity: 0;
+    animation: fadeUp 1.2s 0.5s ease forwards;
+  }
 
-        .news-table tr:hover {
-            background-color: #f9f9f9;
-        }
+  /* Placeholder portrait (gradient silhouette) */
+  .portrait-placeholder {
+    position: absolute;
+    right: 8%;
+    bottom: 0;
+    width: 360px;
+    height: 80%;
+    background: linear-gradient(180deg,
+      rgba(26,58,107,0) 0%,
+      rgba(26,58,107,0.2) 30%,
+      rgba(200,169,110,0.08) 100%
+    );
+    border-left: 1px solid rgba(200,169,110,0.1);
+    opacity: 0;
+    animation: fadeUp 1.2s 0.3s ease forwards;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    overflow: hidden;
+  }
 
-        .news-table td:nth-child(2) {
-            text-align: left;
-            font-weight: 500;
-            cursor: pointer;
-            color: #333;
-        }
+  /* SVG silhouette */
+  .portrait-placeholder::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, transparent 50%, rgba(10,22,40,0.9) 100%);
+    z-index: 1;
+  }
 
-        .news-table td:nth-child(2):hover {
-            color: var(--secondary-color);
-            text-decoration: underline;
-        }
+  .portrait-svg {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.15;
+  }
 
-        /* Forms */
-        .form-container {
-            background: var(--bg-white);
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            max-width: 600px;
-            margin: 0 auto;
-        }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
 
-        .form-group {
-            margin-bottom: 20px;
-        }
+  .hero-content {
+    position: relative;
+    z-index: 10;
+    padding: 0 7%;
+    max-width: 640px;
+  }
 
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-            color: var(--text-dark);
-        }
+  .hero-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.2s ease forwards;
+  }
 
-        .form-group input, .form-group textarea {
-            width: 100%;
-            padding: 12px 15px;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            font-size: 1rem;
-            transition: var(--transition);
-        }
+  .hero-label::before {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 1px;
+    background: var(--accent);
+  }
 
-        .form-group input:focus, .form-group textarea:focus {
-            outline: none;
-            border-color: var(--secondary-color);
-            box-shadow: 0 0 0 3px rgba(30, 136, 229, 0.1);
-        }
+  .hero-label span {
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: var(--accent);
+    text-transform: uppercase;
+    font-weight: 500;
+  }
 
-        .btn {
-            display: inline-block;
-            background: var(--primary-color);
-            color: var(--text-light);
-            padding: 12px 30px;
-            border: none;
-            border-radius: 6px;
-            font-size: 1rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: var(--transition);
-            width: 100%;
-        }
+  .hero-title {
+    font-family: 'Noto Serif KR', serif;
+    font-size: clamp(42px, 5vw, 68px);
+    font-weight: 700;
+    line-height: 1.18;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+    opacity: 0;
+    animation: fadeUp 0.9s 0.35s ease forwards;
+  }
 
-        .btn:hover {
-            background: var(--secondary-color);
-        }
+  .hero-title .accent-line {
+    color: var(--accent);
+    font-style: italic;
+    font-family: 'Playfair Display', serif;
+  }
 
-        /* Footer */
-        footer {
-            background: #111;
-            color: #aaa;
-            text-align: center;
-            padding: 40px 20px;
-        }
+  .hero-subtitle {
+    font-size: 15px;
+    line-height: 1.8;
+    color: var(--text-light);
+    margin-bottom: 48px;
+    font-weight: 300;
+    max-width: 460px;
+    opacity: 0;
+    animation: fadeUp 0.9s 0.5s ease forwards;
+  }
 
-        footer p {
-            margin-bottom: 10px;
-        }
+  .hero-actions {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    opacity: 0;
+    animation: fadeUp 0.9s 0.65s ease forwards;
+  }
 
-        /* Animations */
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+  .btn-primary {
+    padding: 14px 36px;
+    background: var(--accent);
+    color: var(--navy);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    cursor: pointer;
+    border: none;
+    font-family: 'Noto Sans KR', sans-serif;
+    transition: all 0.3s;
+    text-transform: uppercase;
+    text-decoration: none;
+    display: inline-block;
+  }
 
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+  .btn-primary:hover {
+    background: var(--gold);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(200,169,110,0.3);
+  }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            nav ul {
-                display: none; /* simple mobile handling */
-            }
-            #home h2 {
-                font-size: 2.5rem;
-            }
-            section {
-                padding: 50px 5%;
-            }
-        }
-    </style>
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--text-light);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    transition: color 0.3s;
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-family: 'Noto Sans KR', sans-serif;
+  }
+
+  .btn-ghost svg { transition: transform 0.3s; }
+  .btn-ghost:hover { color: var(--accent); }
+  .btn-ghost:hover svg { transform: translateX(4px); }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    opacity: 0;
+    animation: fadeUp 1s 1s ease forwards;
+  }
+
+  .hero-scroll span {
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 48px;
+    background: linear-gradient(to bottom, var(--accent), transparent);
+    animation: scrollPulse 2s ease infinite;
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.3; transform: scaleY(1); }
+    50% { opacity: 1; transform: scaleY(1.1); }
+  }
+
+  /* ── MARQUEE ── */
+  .marquee-strip {
+    background: var(--accent);
+    padding: 12px 0;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .marquee-inner {
+    display: flex;
+    gap: 0;
+    animation: marquee 30s linear infinite;
+    white-space: nowrap;
+  }
+
+  .marquee-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+    padding: 0 32px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    color: var(--navy);
+    text-transform: uppercase;
+    flex-shrink: 0;
+  }
+
+  .marquee-dot {
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    background: var(--navy);
+    opacity: 0.4;
+  }
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* ── SECTION COMMON ── */
+  section { position: relative; z-index: 1; }
+
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .section-label::before {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  .section-label span {
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--accent);
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  .section-title {
+    font-family: 'Noto Serif KR', serif;
+    font-size: clamp(28px, 3vw, 42px);
+    font-weight: 700;
+    line-height: 1.3;
+    letter-spacing: -0.02em;
+  }
+
+  /* ── PRESIDENT BIO SECTION ── */
+  .bio-section {
+    padding: 120px 7%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    background: var(--deep-blue);
+  }
+
+  .bio-image-wrap {
+    position: relative;
+  }
+
+  .bio-img-frame {
+    width: 100%;
+    aspect-ratio: 3/4;
+    background: linear-gradient(135deg, var(--royal) 0%, var(--navy) 100%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .bio-img-frame::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(135deg, rgba(200,169,110,0.15) 0%, transparent 50%),
+      url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c8a96e' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  .bio-img-inner {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .bio-president-icon {
+    opacity: 0.3;
+  }
+
+  .bio-img-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 32px 24px;
+    background: linear-gradient(to top, rgba(10,22,40,0.95), transparent);
+  }
+
+  .bio-img-caption h3 {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    margin-bottom: 4px;
+  }
+
+  .bio-img-caption p {
+    font-size: 12px;
+    color: var(--accent);
+    letter-spacing: 0.15em;
+  }
+
+  .bio-accent-border {
+    position: absolute;
+    top: -16px; left: -16px;
+    right: 16px; bottom: 16px;
+    border: 1px solid rgba(200,169,110,0.2);
+    pointer-events: none;
+  }
+
+  .bio-number {
+    position: absolute;
+    top: 24px; right: -24px;
+    font-family: 'Playfair Display', serif;
+    font-size: 96px;
+    font-weight: 700;
+    color: rgba(200,169,110,0.06);
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .bio-content {}
+
+  .bio-quote {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 1.6;
+    color: var(--light-gold);
+    margin-bottom: 32px;
+    padding-left: 24px;
+    border-left: 2px solid var(--accent);
+    font-style: italic;
+  }
+
+  .bio-text {
+    font-size: 14px;
+    line-height: 2;
+    color: var(--text-light);
+    font-weight: 300;
+    margin-bottom: 48px;
+  }
+
+  .bio-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .stat-card {
+    padding: 20px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(200,169,110,0.12);
+    text-align: center;
+    transition: all 0.3s;
+  }
+
+  .stat-card:hover {
+    background: rgba(200,169,110,0.06);
+    border-color: rgba(200,169,110,0.3);
+    transform: translateY(-4px);
+  }
+
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .stat-label {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+  }
+
+  /* ── AGENDA SECTION ── */
+  .agenda-section {
+    padding: 120px 7%;
+    background: var(--navy);
+  }
+
+  .agenda-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: end;
+    margin-bottom: 64px;
+  }
+
+  .agenda-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    background: rgba(200,169,110,0.08);
+  }
+
+  .agenda-card {
+    background: var(--card);
+    padding: 40px 32px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s;
+    cursor: default;
+  }
+
+  .agenda-card::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+  }
+
+  .agenda-card:hover {
+    background: rgba(26,58,107,0.6);
+    transform: translateY(-4px);
+    box-shadow: 0 16px 48px rgba(0,0,0,0.3);
+  }
+
+  .agenda-card:hover::before { transform: scaleX(1); }
+
+  .agenda-icon {
+    width: 48px; height: 48px;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(200,169,110,0.1);
+    border-radius: 0;
+  }
+
+  .agenda-num {
+    position: absolute;
+    top: 20px; right: 24px;
+    font-family: 'Playfair Display', serif;
+    font-size: 56px;
+    font-weight: 700;
+    color: rgba(200,169,110,0.05);
+    line-height: 1;
+  }
+
+  .agenda-card h3 {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    letter-spacing: -0.01em;
+  }
+
+  .agenda-card p {
+    font-size: 13px;
+    line-height: 1.9;
+    color: var(--muted);
+    font-weight: 300;
+  }
+
+  /* ── NEWS SECTION ── */
+  .news-section {
+    padding: 120px 7%;
+    background: var(--surface);
+    position: relative;
+  }
+
+  .news-section::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--accent), transparent);
+  }
+
+  .news-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 56px;
+  }
+
+  .news-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 10px;
+    background: rgba(255,255,255,0.03);
+  }
+
+  .news-card {
+    background: var(--card);
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.4s;
+    position: relative;
+  }
+
+  .news-card:hover { transform: translateY(-4px); box-shadow: 0 20px 60px rgba(0,0,0,0.4); }
+
+  .news-img {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: linear-gradient(135deg, var(--royal) 0%, var(--deep-blue) 100%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .news-card:first-child .news-img { aspect-ratio: 16/10; }
+
+  .news-img-inner {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.2;
+  }
+
+  .news-img::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, transparent 40%, rgba(13,33,71,0.9) 100%);
+  }
+
+  .news-cat {
+    position: absolute;
+    top: 16px; left: 16px;
+    background: var(--accent);
+    color: var(--navy);
+    font-size: 10px;
+    font-weight: 700;
+    padding: 4px 10px;
+    letter-spacing: 0.12em;
+    z-index: 2;
+  }
+
+  .news-body {
+    padding: 24px;
+  }
+
+  .news-date {
+    font-size: 11px;
+    color: var(--muted);
+    margin-bottom: 10px;
+    letter-spacing: 0.1em;
+  }
+
+  .news-title {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.6;
+    margin-bottom: 12px;
+    letter-spacing: -0.01em;
+  }
+
+  .news-card:first-child .news-title { font-size: 22px; }
+
+  .news-excerpt {
+    font-size: 13px;
+    line-height: 1.8;
+    color: var(--muted);
+    font-weight: 300;
+  }
+
+  /* ── PHOTO SECTION ── */
+  .photo-section {
+    padding: 120px 7%;
+    background: var(--navy);
+  }
+
+  .photo-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 48px;
+  }
+
+  .photo-masonry {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 240px);
+    gap: 4px;
+  }
+
+  .photo-item {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+  }
+
+  .photo-item:nth-child(1) { grid-column: 1 / 3; grid-row: 1 / 2; }
+  .photo-item:nth-child(4) { grid-column: 3 / 5; grid-row: 2 / 3; }
+
+  .photo-inner {
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s ease;
+    position: relative;
+  }
+
+  .photo-item:hover .photo-inner { transform: scale(1.05); }
+
+  .photo-bg {
+    width: 100%;
+    height: 100%;
+    background: var(--royal);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .photo-bg::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.4;
+  }
+
+  /* Different gradient for each photo */
+  .photo-item:nth-child(1) .photo-bg { background: linear-gradient(135deg, #0D3B6E 0%, #1A5276 100%); }
+  .photo-item:nth-child(2) .photo-bg { background: linear-gradient(135deg, #1B2A4A 0%, #2C3E6B 100%); }
+  .photo-item:nth-child(3) .photo-bg { background: linear-gradient(135deg, #0A2040 0%, #1A3A6B 100%); }
+  .photo-item:nth-child(4) .photo-bg { background: linear-gradient(135deg, #142342 0%, #243865 100%); }
+  .photo-item:nth-child(5) .photo-bg { background: linear-gradient(135deg, #0C1A30 0%, #182940 100%); }
+
+  .photo-label {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 20px 20px 16px;
+    background: linear-gradient(to top, rgba(10,22,40,0.92) 0%, transparent 100%);
+    opacity: 0;
+    transition: opacity 0.3s;
+    z-index: 2;
+  }
+
+  .photo-item:hover .photo-label { opacity: 1; }
+
+  .photo-label span {
+    font-size: 12px;
+    color: var(--light-gold);
+    letter-spacing: 0.1em;
+  }
+
+  .photo-icon {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0.12;
+  }
+
+  /* ── SPEECH SECTION ── */
+  .speech-section {
+    padding: 120px 7%;
+    background: var(--deep-blue);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .speech-section::before {
+    content: '❝';
+    position: absolute;
+    top: 40px; left: 50%;
+    transform: translateX(-50%);
+    font-size: 200px;
+    color: rgba(200,169,110,0.04);
+    font-family: serif;
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .speech-content {
+    max-width: 780px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .speech-quote {
+    font-family: 'Noto Serif KR', serif;
+    font-size: clamp(20px, 2.5vw, 30px);
+    font-weight: 600;
+    line-height: 1.8;
+    color: var(--light-gold);
+    margin-bottom: 40px;
+    font-style: italic;
+  }
+
+  .speech-attr {
+    font-size: 13px;
+    color: var(--muted);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+  }
+
+  .speech-attr::before,
+  .speech-attr::after {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: rgba(200,169,110,0.3);
+  }
+
+  /* ── TIMELINE SECTION ── */
+  .timeline-section {
+    padding: 120px 7%;
+    background: var(--navy);
+  }
+
+  .timeline-header {
+    margin-bottom: 64px;
+  }
+
+  .timeline {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 120px;
+    top: 0; bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, var(--accent), transparent);
+  }
+
+  .tl-item {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 40px;
+    margin-bottom: 48px;
+    position: relative;
+  }
+
+  .tl-item::after {
+    content: '';
+    position: absolute;
+    left: calc(120px - 4px);
+    top: 8px;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 2px solid var(--navy);
+  }
+
+  .tl-year {
+    text-align: right;
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--accent);
+    padding-top: 4px;
+  }
+
+  .tl-content h4 {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
+  }
+
+  .tl-content p {
+    font-size: 13px;
+    line-height: 1.8;
+    color: var(--muted);
+    font-weight: 300;
+  }
+
+  /* ── CONTACT/PETITION ── */
+  .petition-section {
+    padding: 120px 7%;
+    background: var(--surface);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .petition-content {}
+
+  .petition-form {
+    background: var(--card);
+    padding: 48px;
+    border: 1px solid rgba(200,169,110,0.1);
+  }
+
+  .form-group {
+    margin-bottom: 24px;
+  }
+
+  .form-group label {
+    display: block;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    width: 100%;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(200,169,110,0.15);
+    color: var(--white);
+    padding: 12px 16px;
+    font-size: 14px;
+    font-family: 'Noto Sans KR', sans-serif;
+    outline: none;
+    transition: border-color 0.3s;
+    resize: none;
+    appearance: none;
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus,
+  .form-group select:focus {
+    border-color: var(--accent);
+    background: rgba(200,169,110,0.04);
+  }
+
+  .form-group textarea { height: 120px; }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #060E1A;
+    padding: 80px 7% 40px;
+    border-top: 1px solid rgba(200,169,110,0.1);
+  }
+
+  .footer-top {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 60px;
+    margin-bottom: 64px;
+  }
+
+  .footer-brand {}
+
+  .footer-brand .logo-text .ko {
+    font-size: 18px;
+    font-family: 'Noto Serif KR', serif;
+    margin-bottom: 4px;
+    display: block;
+    color: var(--white);
+    letter-spacing: 0.05em;
+    font-weight: 600;
+  }
+
+  .footer-brand .logo-text .en {
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.2em;
+    display: block;
+    margin-bottom: 20px;
+  }
+
+  .footer-brand p {
+    font-size: 13px;
+    line-height: 1.9;
+    color: var(--muted);
+    font-weight: 300;
+    max-width: 280px;
+  }
+
+  .footer-col h4 {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 20px;
+  }
+
+  .footer-col ul { list-style: none; }
+
+  .footer-col ul li {
+    margin-bottom: 10px;
+  }
+
+  .footer-col ul li a {
+    font-size: 13px;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.3s;
+    font-weight: 300;
+  }
+
+  .footer-col ul li a:hover { color: var(--text-light); }
+
+  .footer-bottom {
+    padding-top: 32px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-bottom p {
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 300;
+  }
+
+  .footer-flags {
+    display: flex;
+    gap: 12px;
+  }
+
+  .flag-item {
+    width: 28px; height: 20px;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+
+  /* Taegeukgi flag mini */
+  .flag-kr {
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* ── SNS LINKS ── */
+  .social-links {
+    display: flex;
+    gap: 12px;
+    margin-top: 24px;
+  }
+
+  .social-btn {
+    width: 36px; height: 36px;
+    border: 1px solid rgba(200,169,110,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-decoration: none;
+    color: var(--muted);
+  }
+
+  .social-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: rgba(200,169,110,0.08);
+  }
+
+  /* ── MOBILE NAV ── */
+  .mobile-menu { display: none; }
+
+  @media (max-width: 900px) {
+    header { padding: 0 20px; }
+    nav, .header-cta { display: none; }
+    .mobile-menu { display: block; cursor: pointer; background: none; border: none; color: var(--white); }
+    .hero-content { padding: 0 20px; }
+    .bio-section, .petition-section { grid-template-columns: 1fr; padding: 60px 20px; }
+    .agenda-grid { grid-template-columns: 1fr; }
+    .news-grid { grid-template-columns: 1fr; }
+    .photo-masonry { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+    .photo-item:nth-child(1), .photo-item:nth-child(4) { grid-column: auto; grid-row: auto; }
+    .footer-top { grid-template-columns: 1fr; gap: 32px; }
+    .agenda-header, .news-header, .photo-header { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+    .timeline::before { left: 80px; }
+    .tl-item { grid-template-columns: 80px 1fr; gap: 24px; }
+    .tl-item::after { left: calc(80px - 4px); }
+  }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Active nav highlight */
+  header.scrolled {
+    background: rgba(6,14,26,0.95);
+    box-shadow: 0 4px 40px rgba(0,0,0,0.4);
+  }
+</style>
 </head>
 <body>
 
-    <!-- 헤더 -->
-    <header>
-        <div class="logo">미래정당</div>
-        <nav>
-            <ul>
-                <li><a href="#home">홈</a></li>
-                <li><a href="#about">정당소개</a></li>
-                <li><a href="#policy">정책</a></li>
-                <li><a href="#news">뉴스</a></li>
-                <li><a href="#contact">참여/소통</a></li>
-            </ul>
-        </nav>
-        <a href="#login" class="login-btn">로그인</a>
-    </header>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
 
-    <!-- 메인 (Hero) -->
-    <section id="home">
-        <h2>국민과 함께, 새로운 미래로</h2>
-        <p>더 나은 내일을 위해 앞장서는 정당이 되겠습니다.</p>
-        <a href="#policy" style="background:var(--secondary-color); color:white; padding:15px 30px; border-radius:30px; font-weight:bold; font-size:1.1rem; box-shadow: 0 4px 15px rgba(0,0,0,0.3); transition:all 0.3s;">우리의 공약 보기</a>
-    </section>
+<!-- ── HEADER ── -->
+<header id="header">
+  <a class="header-logo" href="#">
+    <!-- Taegeukgi emblem SVG -->
+    <div class="logo-emblem">
+      <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="50" r="48" stroke="#C8A96E" stroke-width="1.5" opacity="0.4"/>
+        <!-- Taegeuk symbol simplified -->
+        <circle cx="50" cy="50" r="20" fill="none" stroke="#C8A96E" stroke-width="1" opacity="0.6"/>
+        <path d="M50 30 A20 20 0 0 1 50 70 A10 10 0 0 1 50 50 A10 10 0 0 0 50 30Z" fill="#CD2E3A" opacity="0.8"/>
+        <path d="M50 30 A20 20 0 0 0 50 70 A10 10 0 0 0 50 50 A10 10 0 0 1 50 30Z" fill="#003478" opacity="0.8"/>
+        <!-- Corner trigrams representation -->
+        <g stroke="#C8A96E" stroke-width="1.5" opacity="0.5">
+          <line x1="15" y1="20" x2="28" y2="20"/>
+          <line x1="15" y1="25" x2="28" y2="25"/>
+          <line x1="15" y1="30" x2="21" y2="30"/>
+          <line x1="24" y1="30" x2="28" y2="30"/>
+          <line x1="72" y1="20" x2="85" y2="20"/>
+          <line x1="72" y1="25" x2="85" y2="25"/>
+          <line x1="72" y1="30" x2="78" y2="30"/>
+          <line x1="81" y1="30" x2="85" y2="30"/>
+          <line x1="15" y1="70" x2="28" y2="70"/>
+          <line x1="15" y1="75" x2="21" y2="75"/>
+          <line x1="24" y1="75" x2="28" y2="75"/>
+          <line x1="15" y1="80" x2="28" y2="80"/>
+          <line x1="72" y1="70" x2="85" y2="70"/>
+          <line x1="72" y1="75" x2="85" y2="75"/>
+          <line x1="72" y1="80" x2="85" y2="80"/>
+        </g>
+      </svg>
+    </div>
+    <div class="logo-text">
+      <span class="ko">대한민국 대통령</span>
+      <span class="en">President of the Republic of Korea</span>
+    </div>
+  </a>
+  <nav>
+    <a href="#president">대통령 소개</a>
+    <a href="#agenda">국정과제</a>
+    <a href="#news">뉴스룸</a>
+    <a href="#gallery">포토갤러리</a>
+    <a href="#petition">국민청원</a>
+  </nav>
+  <div class="header-cta">
+    <button class="btn-outline">한국어 ▾</button>
+    <button class="mobile-menu">
+      <svg width="22" height="18" viewBox="0 0 22 18" fill="none">
+        <line x1="0" y1="1" x2="22" y2="1" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="0" y1="9" x2="22" y2="9" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="0" y1="17" x2="22" y2="17" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+    </button>
+  </div>
+</header>
 
-    <!-- 정당 소개 -->
-    <section id="about" style="background-color: #fff;">
-        <h2 class="section-title">정당 소개</h2>
-        <div class="card-container">
-            <div class="card">
-                <h3>비전 및 가치</h3>
-                <p>공정하고 정의로운 사회 구현. 모든 국민이 차별 없이 기회를 보장받는 따뜻한 공동체를 만들어 갑니다.</p>
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-geo">
+    <div class="geo-circle"></div>
+    <div class="geo-circle"></div>
+    <div class="geo-circle"></div>
+  </div>
+
+  <!-- Abstract portrait area -->
+  <div class="portrait-placeholder">
+    <svg class="portrait-svg" viewBox="0 0 360 520" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="100" y="60" width="160" height="180" rx="80" fill="rgba(200,169,110,0.3)"/>
+      <rect x="60" y="240" width="240" height="280" rx="20" fill="rgba(200,169,110,0.2)"/>
+      <circle cx="130" cy="150" r="12" fill="rgba(200,169,110,0.4)"/>
+      <circle cx="230" cy="150" r="12" fill="rgba(200,169,110,0.4)"/>
+      <path d="M140 190 Q180 215 220 190" stroke="rgba(200,169,110,0.5)" stroke-width="3" fill="none" stroke-linecap="round"/>
+    </svg>
+    <div class="bio-img-caption" style="opacity:0.7">
+      <h3>이재명</h3>
+      <p>제 21대 대한민국 대통령</p>
+    </div>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-label">
+      <span>제 21대 대한민국 대통령</span>
+    </div>
+    <h1 class="hero-title">
+      국민이 주인인<br>
+      <span class="accent-line">나라를 만듭니다</span>
+    </h1>
+    <p class="hero-subtitle">
+      함께하는 세상, 모두가 행복한 나라.<br>
+      이재명 대통령은 국민의 뜻을 받들어<br>
+      새로운 대한민국을 열어갑니다.
+    </p>
+    <div class="hero-actions">
+      <a href="#agenda" class="btn-primary">국정과제 보기</a>
+      <button class="btn-ghost">
+        청와대 소개
+        <svg width="16" height="12" viewBox="0 0 16 12" fill="none">
+          <path d="M10 1l5 5-5 5M15 6H1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ── MARQUEE ── -->
+<div class="marquee-strip">
+  <div class="marquee-inner">
+    <div class="marquee-item">함께하는 세상 <div class="marquee-dot"></div></div>
+    <div class="marquee-item">국민이 주인인 나라 <div class="marquee-dot"></div></div>
+    <div class="marquee-item">경제 회복 <div class="marquee-dot"></div></div>
+    <div class="marquee-item">민생 안정 <div class="marquee-dot"></div></div>
+    <div class="marquee-item">한반도 평화 <div class="marquee-dot"></div></div>
+    <div class="marquee-item">공정한 사회 <div class="marquee-dot"></div></div>
+    <div class="marquee-item">미래 세대를 위하여 <div class="marquee-dot"></div></div>
+    <div class="marquee-item">대한민국의 새로운 시작 <div class="marquee-dot"></div></div>
+    <!-- duplicate for seamless loop -->
+    <div class="marquee-item">함께하는 세상 <div class="marquee-dot"></div></div>
+    <div class="marquee-item">국민이 주인인 나라 <div class="marquee-dot"></div></div>
+    <div class="marquee-item">경제 회복 <div class="marquee-dot"></div></div>
+    <div class="marquee-item">민생 안정 <div class="marquee-dot"></div></div>
+    <div class="marquee-item">한반도 평화 <div class="marquee-dot"></div></div>
+    <div class="marquee-item">공정한 사회 <div class="marquee-dot"></div></div>
+    <div class="marquee-item">미래 세대를 위하여 <div class="marquee-dot"></div></div>
+    <div class="marquee-item">대한민국의 새로운 시작 <div class="marquee-dot"></div></div>
+  </div>
+</div>
+
+<!-- ── PRESIDENT BIO ── -->
+<section class="bio-section" id="president">
+  <div class="bio-image-wrap reveal">
+    <div class="bio-accent-border"></div>
+    <div class="bio-number">21</div>
+    <div class="bio-img-frame">
+      <div class="bio-img-inner">
+        <svg class="bio-president-icon" width="120" height="160" viewBox="0 0 120 160" fill="none">
+          <circle cx="60" cy="50" r="38" stroke="#C8A96E" stroke-width="2"/>
+          <path d="M10 160 Q10 100 60 100 Q110 100 110 160" stroke="#C8A96E" stroke-width="2" fill="none"/>
+          <circle cx="45" cy="48" r="5" fill="#C8A96E" opacity="0.6"/>
+          <circle cx="75" cy="48" r="5" fill="#C8A96E" opacity="0.6"/>
+          <path d="M48 65 Q60 75 72 65" stroke="#C8A96E" stroke-width="2" fill="none" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="bio-img-caption">
+        <h3>이재명 대통령</h3>
+        <p>제 21대 대한민국 대통령 · 2025년 6월 취임</p>
+      </div>
+    </div>
+  </div>
+  <div class="bio-content reveal">
+    <div class="section-label"><span>President</span></div>
+    <h2 class="section-title" style="margin-bottom:32px">국민과 함께<br>새로운 대한민국</h2>
+    <blockquote class="bio-quote">
+      "국민이 주인인 나라,<br>국민이 행복한 나라를<br>국민과 함께 만들겠습니다."
+    </blockquote>
+    <p class="bio-text">
+      이재명 대통령은 1963년 경상북도 안동에서 태어나 어려운 환경 속에서도 주경야독으로
+      중앙대학교 법학과를 졸업하고 사법시험에 합격하였습니다. 인권변호사 활동을 거쳐
+      성남시장, 경기도지사를 역임하였으며, 2025년 6월 4일 제21대 대통령에 취임하였습니다.
+    </p>
+    <div class="bio-stats">
+      <div class="stat-card">
+        <span class="stat-num">21대</span>
+        <div class="stat-label">대통령</div>
+      </div>
+      <div class="stat-card">
+        <span class="stat-num">2025</span>
+        <div class="stat-label">취임 연도</div>
+      </div>
+      <div class="stat-card">
+        <span class="stat-num">5년</span>
+        <div class="stat-label">임기</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── AGENDA ── -->
+<section class="agenda-section" id="agenda">
+  <div class="agenda-header">
+    <div class="reveal">
+      <div class="section-label"><span>국정과제</span></div>
+      <h2 class="section-title">대한민국을 바꿀<br>핵심 과제</h2>
+    </div>
+    <div class="reveal">
+      <p style="font-size:14px;line-height:1.9;color:var(--muted);font-weight:300;max-width:320px">
+        국민의 삶을 실질적으로 개선하고<br>
+        미래 세대를 위한 지속 가능한 국가를<br>
+        만들기 위한 6대 국정과제입니다.
+      </p>
+    </div>
+  </div>
+  <div class="agenda-grid">
+    <div class="agenda-card reveal">
+      <div class="agenda-num">01</div>
+      <div class="agenda-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="#C8A96E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <h3>민생경제 회복</h3>
+      <p>서민과 중산층의 경제적 어려움을 해소하고 소상공인·자영업자 지원을 강화합니다. 전 국민 민생회복 지원을 통해 내수 경제를 활성화합니다.</p>
+    </div>
+    <div class="agenda-card reveal">
+      <div class="agenda-num">02</div>
+      <div class="agenda-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="10" stroke="#C8A96E" stroke-width="1.5"/>
+          <path d="M12 6v6l4 2" stroke="#C8A96E" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <h3>AI·미래산업 육성</h3>
+      <p>인공지능과 첨단 기술 분야 투자를 대폭 확대하여 대한민국을 글로벌 AI 강국으로 도약시킵니다.</p>
+    </div>
+    <div class="agenda-card reveal">
+      <div class="agenda-num">03</div>
+      <div class="agenda-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" stroke="#C8A96E" stroke-width="1.5"/>
+          <path d="M9 22V12h6v10" stroke="#C8A96E" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <h3>주거복지 강화</h3>
+      <p>공공주택 공급 확대와 전월세 안정화 정책을 통해 국민 누구나 안정적으로 살 수 있는 주거환경을 만듭니다.</p>
+    </div>
+    <div class="agenda-card reveal">
+      <div class="agenda-num">04</div>
+      <div class="agenda-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" stroke="#C8A96E" stroke-width="1.5"/>
+        </svg>
+      </div>
+      <h3>의료·돌봄 혁신</h3>
+      <p>필수의료 체계를 강화하고 지역의료 불균형을 해소합니다. 국민 건강보험 보장성을 확대하고 노인·장애인 돌봄 서비스를 향상합니다.</p>
+    </div>
+    <div class="agenda-card reveal">
+      <div class="agenda-num">05</div>
+      <div class="agenda-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" stroke="#C8A96E" stroke-width="1.5" stroke-linecap="round"/>
+          <circle cx="9" cy="7" r="4" stroke="#C8A96E" stroke-width="1.5"/>
+          <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" stroke="#C8A96E" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <h3>교육 공정성 제고</h3>
+      <p>사교육비 부담을 줄이고 공교육 질을 높입니다. 지역·계층 간 교육 격차를 해소하여 모든 아이에게 공평한 기회를 제공합니다.</p>
+    </div>
+    <div class="agenda-card reveal">
+      <div class="agenda-num">06</div>
+      <div class="agenda-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="10" stroke="#C8A96E" stroke-width="1.5"/>
+          <line x1="2" y1="12" x2="22" y2="12" stroke="#C8A96E" stroke-width="1.5"/>
+          <path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z" stroke="#C8A96E" stroke-width="1.5"/>
+        </svg>
+      </div>
+      <h3>한반도 평화 외교</h3>
+      <p>남북관계 개선과 한반도 비핵화를 위한 대화를 재개합니다. 한미동맹을 강화하면서 자주적 외교를 통해 국제적 위상을 높입니다.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── SPEECH SECTION ── -->
+<section class="speech-section">
+  <div class="speech-content reveal">
+    <div class="section-label" style="justify-content:center;margin-bottom:32px">
+      <span>취임 연설</span>
+    </div>
+    <blockquote class="speech-quote">
+      "저는 오늘 대한민국 제21대 대통령으로서
+      국민 앞에 섰습니다. 이 자리는 제 자리가 아니라
+      국민 여러분의 자리입니다. 국민이 주인인 나라,
+      국민이 행복한 나라를 국민과 함께 만들겠습니다."
+    </blockquote>
+    <div class="speech-attr">
+      이재명 대통령 — 2025년 6월 4일 취임 선서식
+    </div>
+  </div>
+</section>
+
+<!-- ── NEWS ── -->
+<section class="news-section" id="news">
+  <div class="news-header">
+    <div class="reveal">
+      <div class="section-label"><span>뉴스룸</span></div>
+      <h2 class="section-title">청와대 소식</h2>
+    </div>
+    <a href="#" class="btn-ghost reveal">
+      전체 보기
+      <svg width="16" height="12" viewBox="0 0 16 12" fill="none">
+        <path d="M10 1l5 5-5 5M15 6H1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </a>
+  </div>
+  <div class="news-grid reveal">
+    <% if (news && news.length > 0) { %>
+      <% news.forEach(function(item, index) { %>
+        <div class="news-card">
+          <div class="news-img">
+            <div class="news-cat">새소식</div>
+            <div class="news-img-inner">
+              <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
+                <circle cx="30" cy="30" r="25" stroke="#C8A96E" stroke-width="2"/>
+                <line x1="5" y1="30" x2="55" y2="30" stroke="#C8A96E" stroke-width="1.5"/>
+                <path d="M30 5 Q40 20 40 30 Q40 40 30 55 Q20 40 20 30 Q20 20 30 5" stroke="#C8A96E" stroke-width="1.5" fill="none"/>
+              </svg>
             </div>
-            <div class="card">
-                <h3>조직도</h3>
-                <p>국민의 목소리를 가장 가까이에서 듣기 위해 수평적이고 체계적인 조직을 구성하여 운영하고 있습니다.</p>
-            </div>
-            <div class="card">
-                <h3>주요 인물</h3>
-                <p><strong>대표:</strong> 홍길동<br><strong>원내대표:</strong> 김철수<br>국민을 위해 헌신하는 든든한 리더들입니다.</p>
-            </div>
+          </div>
+          <div class="news-body">
+            <div class="news-date"><%= item.date %></div>
+            <h3 class="news-title"><%= item.title %></h3>
+            <p class="news-excerpt">클릭하여 상세 내용을 확인하세요.</p>
+          </div>
         </div>
-    </section>
+      <% }); %>
+    <% } else { %>
+      <div style="padding: 24px; color: var(--muted);">등록된 소식이 없습니다.</div>
+    <% } %>
+  </div>
+</section>
 
-    <!-- 정책 -->
-    <section id="policy">
-        <h2 class="section-title">핵심 정책 / 공약</h2>
-        <div class="card-container">
-            <div class="card" style="border-top-color: #e53935;">
-                <h3 style="color:#e53935;">경제</h3>
-                <p>중소기업 및 소상공인 지원을 대폭 확대하고, 신성장 동력을 육성하여 활력 있는 경제를 구축합니다.</p>
-            </div>
-            <div class="card" style="border-top-color: #43a047;">
-                <h3 style="color:#43a047;">복지</h3>
-                <p>요람에서 무덤까지, 사각지대 없는 기본 복지를 강화하여 국민의 삶의 질을 획기적으로 높입니다.</p>
-            </div>
-            <div class="card" style="border-top-color: #fdd835;">
-                <h3 style="color:#fbc02d;">교육</h3>
-                <p>미래 세대를 위한 공교육 혁신과 평생 교육 시스템 구축으로 모두가 함께 성장하는 기반을 마련합니다.</p>
-            </div>
+<!-- ── PHOTO GALLERY ── -->
+<section class="photo-section" id="gallery">
+  <div class="photo-header">
+    <div class="reveal">
+      <div class="section-label"><span>포토갤러리</span></div>
+      <h2 class="section-title">사진으로 보는<br>대통령</h2>
+    </div>
+    <a href="#" class="btn-ghost reveal">
+      더 보기
+      <svg width="16" height="12" viewBox="0 0 16 12" fill="none">
+        <path d="M10 1l5 5-5 5M15 6H1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </a>
+  </div>
+  <div class="photo-masonry reveal">
+    <div class="photo-item">
+      <div class="photo-inner">
+        <div class="photo-bg">
+          <div class="photo-icon">
+            <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+              <rect x="8" y="20" width="48" height="36" rx="4" stroke="#C8A96E" stroke-width="2"/>
+              <circle cx="32" cy="38" r="10" stroke="#C8A96E" stroke-width="2"/>
+              <rect x="20" y="14" width="10" height="8" rx="2" stroke="#C8A96E" stroke-width="1.5"/>
+            </svg>
+          </div>
         </div>
-    </section>
-
-    <!-- 뉴스 -->
-    <section id="news" style="background-color: #fff;">
-        <h2 class="section-title">최신 뉴스 / 공지</h2>
-        <div style="max-width: 1000px; margin: 0 auto;">
-            <table class="news-table">
-                <thead>
-                    <tr>
-                        <th style="width: 10%;">번호</th>
-                        <th style="width: 70%;">제목</th>
-                        <th style="width: 20%;">작성일</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- 데이터베이스 연동 영역 -->
-                    <% if (news && news.length > 0) { %>
-                        <% news.forEach(function(item) { %>
-                            <tr>
-                                <td><%= item.id %></td>
-                                <td><%= item.title %></td>
-                                <td><%= item.date %></td>
-                            </tr>
-                        <% }); %>
-                    <% } else { %>
-                        <tr>
-                            <td colspan="3">등록된 뉴스가 없습니다.</td>
-                        </tr>
-                    <% } %>
-                </tbody>
-            </table>
-            
-            <div style="margin-top: 30px; display: flex; justify-content: flex-end;">
-                <form style="display: flex; gap: 10px;" action="#" method="GET">
-                    <input type="text" name="q" placeholder="검색어 입력" style="padding: 10px; border: 1px solid #ccc; border-radius: 4px; width: 250px;">
-                    <button type="submit" style="background: var(--primary-color); color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer;">검색</button>
-                </form>
-            </div>
+        <div class="photo-label"><span>취임 선서 — 국회의사당 · 2025.06.04</span></div>
+      </div>
+    </div>
+    <div class="photo-item">
+      <div class="photo-inner">
+        <div class="photo-bg">
+          <div class="photo-icon">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+              <path d="M24 4L4 36h40L24 4z" stroke="#C8A96E" stroke-width="2" fill="none"/>
+              <line x1="24" y1="20" x2="24" y2="30" stroke="#C8A96E" stroke-width="2"/>
+              <circle cx="24" cy="34" r="2" fill="#C8A96E"/>
+            </svg>
+          </div>
         </div>
-    </section>
-
-    <!-- 참여 -->
-    <section id="contact">
-        <h2 class="section-title">참여 / 소통</h2>
-        <div class="form-container">
-            <h3 style="margin-bottom: 20px; color: var(--primary-color); text-align: center;">당원 가입 및 문의</h3>
-            <!-- API 연동 폼 -->
-            <form action="/api/inquiry" method="POST">
-                <div class="form-group">
-                    <label>이름</label>
-                    <input type="text" name="name" placeholder="홍길동" required>
-                </div>
-                <div class="form-group">
-                    <label>이메일</label>
-                    <input type="email" name="email" placeholder="example@domain.com" required>
-                </div>
-                <div class="form-group">
-                    <label>문의 및 의견</label>
-                    <textarea name="message" rows="5" placeholder="자유롭게 의견을 남겨주세요..." required></textarea>
-                </div>
-                <button type="submit" class="btn">제출하기</button>
-            </form>
+        <div class="photo-label"><span>국립현충원 참배</span></div>
+      </div>
+    </div>
+    <div class="photo-item">
+      <div class="photo-inner">
+        <div class="photo-bg">
+          <div class="photo-icon">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+              <circle cx="24" cy="20" r="8" stroke="#C8A96E" stroke-width="2"/>
+              <path d="M8 44 Q8 32 24 32 Q40 32 40 44" stroke="#C8A96E" stroke-width="2" fill="none"/>
+            </svg>
+          </div>
         </div>
-    </section>
+        <div class="photo-label"><span>국민과의 대화</span></div>
+      </div>
+    </div>
+    <div class="photo-item">
+      <div class="photo-inner">
+        <div class="photo-bg">
+          <div class="photo-icon">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+              <circle cx="24" cy="24" r="20" stroke="#C8A96E" stroke-width="2"/>
+              <path d="M4 24h40M24 4a30 30 0 010 40 30 30 0 010-40" stroke="#C8A96E" stroke-width="1.5" fill="none"/>
+            </svg>
+          </div>
+        </div>
+        <div class="photo-label"><span>G20 정상회의</span></div>
+      </div>
+    </div>
+    <div class="photo-item">
+      <div class="photo-inner">
+        <div class="photo-bg">
+          <div class="photo-icon">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+              <rect x="8" y="8" width="32" height="32" rx="4" stroke="#C8A96E" stroke-width="2"/>
+              <line x1="16" y1="20" x2="32" y2="20" stroke="#C8A96E" stroke-width="1.5"/>
+              <line x1="16" y1="28" x2="26" y2="28" stroke="#C8A96E" stroke-width="1.5"/>
+            </svg>
+          </div>
+        </div>
+        <div class="photo-label"><span>국무회의</span></div>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- 푸터 -->
-    <footer>
-        <h3 style="color: #fff; margin-bottom: 10px;">미래정당</h3>
-        <p>서울특별시 영등포구 국회대로 1 미래빌딩 1층 | 대표전화 : 02-123-4567 | 이메일 : contact@futureparty.or.kr</p>
-        <p style="margin-top: 20px; font-size: 0.9rem; color: #777;">© 2026 미래정당. All rights reserved.</p>
-    </footer>
+<!-- ── TIMELINE ── -->
+<section class="timeline-section">
+  <div class="timeline-header reveal">
+    <div class="section-label"><span>약력</span></div>
+    <h2 class="section-title">이재명 대통령의<br>삶과 여정</h2>
+  </div>
+  <div class="timeline">
+    <div class="tl-item reveal">
+      <div class="tl-year">1963</div>
+      <div class="tl-content">
+        <h4>경북 안동 출생</h4>
+        <p>경상북도 안동군 예안면에서 태어났습니다. 어려운 환경 속에서도 꿈을 잃지 않았습니다.</p>
+      </div>
+    </div>
+    <div class="tl-item reveal">
+      <div class="tl-year">1986</div>
+      <div class="tl-content">
+        <h4>사법시험 합격 · 변호사 활동</h4>
+        <p>중앙대학교 법학과를 졸업하고 제28회 사법시험에 합격하여 인권변호사로 활동하였습니다.</p>
+      </div>
+    </div>
+    <div class="tl-item reveal">
+      <div class="tl-year">2010</div>
+      <div class="tl-content">
+        <h4>성남시장 당선 (민선 5·6기)</h4>
+        <p>성남시장으로 두 차례 당선되어 성남시립의료원 설립, 청년배당, 무상복지 등 혁신적 정책을 추진하였습니다.</p>
+      </div>
+    </div>
+    <div class="tl-item reveal">
+      <div class="tl-year">2018</div>
+      <div class="tl-content">
+        <h4>경기도지사 당선 (민선 7기)</h4>
+        <p>경기도지사로서 기본소득 시범사업, 경기도주식회사, 재난기본소득 등 선구적인 정책을 시행하였습니다.</p>
+      </div>
+    </div>
+    <div class="tl-item reveal">
+      <div class="tl-year">2025</div>
+      <div class="tl-content">
+        <h4>제21대 대한민국 대통령 취임</h4>
+        <p>2025년 6월 4일, 제21대 대통령 선거에서 승리하여 대한민국 제21대 대통령으로 취임하였습니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
+<!-- ── PETITION ── -->
+<section class="petition-section" id="petition">
+  <div class="petition-content reveal">
+    <div class="section-label"><span>국민청원</span></div>
+    <h2 class="section-title" style="margin-bottom:24px">국민의 목소리를<br>직접 전해주세요</h2>
+    <p style="font-size:14px;line-height:2;color:var(--muted);font-weight:300;max-width:380px;margin-bottom:40px">
+      국민청원은 국민 누구나 정부에 직접 의견을 제시할 수 있는 제도입니다.
+      여러분의 소중한 의견이 정책에 반영됩니다.
+    </p>
+    <div class="bio-stats" style="grid-template-columns:1fr 1fr;max-width:320px">
+      <div class="stat-card">
+        <span class="stat-num">2.4만</span>
+        <div class="stat-label">처리된 청원</div>
+      </div>
+      <div class="stat-card">
+        <span class="stat-num">68%</span>
+        <div class="stat-label">답변 완료율</div>
+      </div>
+    </div>
+  </div>
+  <div class="petition-form reveal">
+    <h3 style="font-family:'Noto Serif KR',serif;font-size:20px;margin-bottom:32px;font-weight:600">청원 신청하기</h3>
+    <form action="/api/inquiry" method="POST">
+      <div class="form-row">
+        <div class="form-group">
+          <label>성명</label>
+          <input type="text" name="name" placeholder="홍길동" required>
+        </div>
+        <div class="form-group">
+          <label>연락처(이메일)</label>
+          <input type="email" name="email" placeholder="example@domain.com" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>분야</label>
+        <select>
+          <option value="">분야를 선택하세요</option>
+          <option>경제·민생</option>
+          <option>교육·복지</option>
+          <option>안전·환경</option>
+          <option>외교·안보</option>
+          <option>기타</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>제목</label>
+        <input type="text" placeholder="청원 제목을 입력하세요">
+      </div>
+      <div class="form-group">
+        <label>내용</label>
+        <textarea name="message" placeholder="청원 내용을 자세히 작성해주세요…" required></textarea>
+      </div>
+      <button type="submit" class="btn-primary" style="width:100%;text-align:center">청원 제출하기</button>
+    </form>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="logo-text">
+        <span class="ko">대한민국 청와대</span>
+        <span class="en">Cheong Wa Dae · Republic of Korea</span>
+      </div>
+      <p>서울특별시 종로구 청와대로 1<br>대표전화: 02-730-5800<br>민원안내: 02-770-0000</p>
+      <div class="social-links">
+        <a class="social-btn" href="#" title="YouTube">
+          <svg width="16" height="12" viewBox="0 0 16 12" fill="none">
+            <rect x="1" y="1" width="14" height="10" rx="2" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M6.5 4l4 2-4 2V4z" fill="currentColor"/>
+          </svg>
+        </a>
+        <a class="social-btn" href="#" title="Facebook">
+          <svg width="10" height="16" viewBox="0 0 10 16" fill="none">
+            <path d="M6.5 9H9l.5-3H6.5V4.5C6.5 3.7 6.9 3 8 3h1.5V.4S8.3 0 7 0C4.7 0 3 1.6 3 4v2H.5v3H3v7h3.5V9z" fill="currentColor"/>
+          </svg>
+        </a>
+        <a class="social-btn" href="#" title="Instagram">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <rect x="1" y="1" width="14" height="14" rx="4" stroke="currentColor" stroke-width="1.5"/>
+            <circle cx="8" cy="8" r="3.5" stroke="currentColor" stroke-width="1.5"/>
+            <circle cx="12" cy="4" r="1" fill="currentColor"/>
+          </svg>
+        </a>
+        <a class="social-btn" href="#" title="Twitter/X">
+          <svg width="16" height="14" viewBox="0 0 16 14" fill="none">
+            <path d="M15 1L9.5 7.5 15 13H12L8 9 3.5 13H.5L6.5 6 1 1h3L8 4.5 12.5 1H15z" fill="currentColor"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>대통령실</h4>
+      <ul>
+        <li><a href="#">대통령 소개</a></li>
+        <li><a href="#">취임사</a></li>
+        <li><a href="#">청와대 소개</a></li>
+        <li><a href="#">비서실 소개</a></li>
+        <li><a href="#">조직도</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>국정운영</h4>
+      <ul>
+        <li><a href="#">국정과제</a></li>
+        <li><a href="#">국무회의</a></li>
+        <li><a href="#">정책브리핑</a></li>
+        <li><a href="#">법령정보</a></li>
+        <li><a href="#">예산정보</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>소통·참여</h4>
+      <ul>
+        <li><a href="#">국민청원</a></li>
+        <li><a href="#">뉴스룸</a></li>
+        <li><a href="#">포토갤러리</a></li>
+        <li><a href="#">동영상</a></li>
+        <li><a href="#">정보공개</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 대한민국 청와대. All rights reserved. | 개인정보처리방침 | 저작권정책 | 이메일무단수집거부</p>
+    <div style="display:flex;align-items:center;gap:16px">
+      <span style="font-size:12px;color:var(--muted)">관련 사이트 ▾</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Custom cursor
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursorRing');
+let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
+
+document.addEventListener('mousemove', e => {
+  mouseX = e.clientX; mouseY = e.clientY;
+  cursor.style.left = mouseX + 'px';
+  cursor.style.top = mouseY + 'px';
+});
+
+function animateRing() {
+  ringX += (mouseX - ringX) * 0.12;
+  ringY += (mouseY - ringY) * 0.12;
+  ring.style.left = ringX + 'px';
+  ring.style.top = ringY + 'px';
+  requestAnimationFrame(animateRing);
+}
+animateRing();
+
+document.querySelectorAll('a, button').forEach(el => {
+  el.addEventListener('mouseenter', () => {
+    ring.style.transform = 'translate(-50%, -50%) scale(1.8)';
+    ring.style.borderColor = 'rgba(200,169,110,0.8)';
+  });
+  el.addEventListener('mouseleave', () => {
+    ring.style.transform = 'translate(-50%, -50%) scale(1)';
+    ring.style.borderColor = 'rgba(200,169,110,0.5)';
+  });
+});
+
+// Sticky header
+const header = document.getElementById('header');
+window.addEventListener('scroll', () => {
+  header.classList.toggle('scrolled', window.scrollY > 60);
+});
+
+// Scroll reveal
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => {
+        entry.target.classList.add('visible');
+      }, 80);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+reveals.forEach(el => observer.observe(el));
+
+// Stagger children
+document.querySelectorAll('.agenda-grid, .news-grid, .bio-stats, .photo-masonry').forEach(grid => {
+  const children = grid.querySelectorAll('.reveal, .agenda-card, .news-card, .photo-item, .stat-card');
+  children.forEach((child, i) => {
+    if (!child.classList.contains('reveal')) {
+      child.classList.add('reveal');
+      child.style.transitionDelay = (i * 80) + 'ms';
+      observer.observe(child);
+    } else {
+      child.style.transitionDelay = (i * 80) + 'ms';
+    }
+  });
+});
+
+// Smooth scroll for nav links
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+
+// Form submission feedback removed to allow actual form submit to trigger redirect correctly
+
+// Counter animation
+function animateCounter(el, target, suffix = '') {
+  let start = 0;
+  const duration = 1500;
+  const step = (target / duration) * 16;
+  const interval = setInterval(() => {
+    start = Math.min(start + step, target);
+    el.textContent = Math.floor(start).toLocaleString() + suffix;
+    if (start >= target) clearInterval(interval);
+  }, 16);
+}
+
+// Number observation
+const numObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      numObserver.unobserve(entry.target);
+    }
+  });
+});
+</script>
 </body>
 </html>
