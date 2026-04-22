@@ -40,6 +40,10 @@ app.post('/api/inquiry', (req, res) => {
     });
 });
 
-app.listen(PORT, () => {
-    console.log(`WAS (Server) is running on http://localhost:${PORT}`);
-});
+if (process.env.NODE_ENV !== 'production' && !process.env.VERCEL) {
+    app.listen(PORT, () => {
+        console.log(`WAS (Server) is running on http://localhost:${PORT}`);
+    });
+}
+
+module.exports = app;
