@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>미래정당 - 국민과 함께하는 새로운 내일</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #0b3d91;
+            --secondary-color: #1e88e5;
+            --text-dark: #333333;
+            --text-light: #ffffff;
+            --bg-light: #f4f7f6;
+            --bg-white: #ffffff;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Noto Sans KR', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Header & Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            z-index: 1000;
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--primary-color);
+            letter-spacing: -1px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            font-weight: 500;
+            color: var(--text-dark);
+            position: relative;
+            padding-bottom: 5px;
+            transition: var(--transition);
+        }
+
+        nav a:hover {
+            color: var(--primary-color);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--primary-color);
+            transition: var(--transition);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .login-btn {
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .login-btn:hover {
+            background-color: var(--secondary-color);
+            color: var(--text-light);
+        }
+
+        /* Hero Section */
+        #home {
+            height: 100vh;
+            background: linear-gradient(rgba(11, 61, 145, 0.7), rgba(30, 136, 229, 0.7)), url('file:///C:/Users/yhgo/.gemini/antigravity/brain/0cc0bfd6-189e-4902-9982-eef0784d3121/hero_bg_1776829526743.png') center/cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: var(--text-light);
+            padding: 0 20px;
+            margin-top: 60px;
+        }
+
+        #home h2 {
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            animation: fadeInDown 1s ease;
+        }
+
+        #home p {
+            font-size: 1.5rem;
+            font-weight: 300;
+            margin-bottom: 40px;
+            animation: fadeInUp 1s ease 0.5s both;
+        }
+
+        /* Sections General */
+        section {
+            padding: 80px 10%;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 4px;
+            background: var(--secondary-color);
+            margin: 15px auto 0;
+            border-radius: 2px;
+        }
+
+        /* Policy & News Cards */
+        .card-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: var(--bg-white);
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: var(--transition);
+            border-top: 5px solid var(--secondary-color);
+            cursor: pointer;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            border-top-color: var(--primary-color);
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        .card p {
+            color: #666;
+            font-size: 1rem;
+        }
+
+        /* News Table */
+        .news-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--bg-white);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .news-table th, .news-table td {
+            padding: 15px 20px;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+        }
+
+        .news-table th {
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        .news-table tr:hover {
+            background-color: #f9f9f9;
+        }
+
+        .news-table td:nth-child(2) {
+            text-align: left;
+            font-weight: 500;
+            cursor: pointer;
+            color: #333;
+        }
+
+        .news-table td:nth-child(2):hover {
+            color: var(--secondary-color);
+            text-decoration: underline;
+        }
+
+        /* Forms */
+        .form-container {
+            background: var(--bg-white);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 3px rgba(30, 136, 229, 0.1);
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--primary-color);
+            color: var(--text-light);
+            padding: 12px 30px;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 100%;
+        }
+
+        .btn:hover {
+            background: var(--secondary-color);
+        }
+
+        /* Footer */
+        footer {
+            background: #111;
+            color: #aaa;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        footer p {
+            margin-bottom: 10px;
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav ul {
+                display: none; /* simple mobile handling */
+            }
+            #home h2 {
+                font-size: 2.5rem;
+            }
+            section {
+                padding: 50px 5%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 헤더 -->
+    <header>
+        <div class="logo">미래정당</div>
+        <nav>
+            <ul>
+                <li><a href="#home">홈</a></li>
+                <li><a href="#about">정당소개</a></li>
+                <li><a href="#policy">정책</a></li>
+                <li><a href="#news">뉴스</a></li>
+                <li><a href="#contact">참여/소통</a></li>
+            </ul>
+        </nav>
+        <a href="#login" class="login-btn">로그인</a>
+    </header>
+
+    <!-- 메인 (Hero) -->
+    <section id="home">
+        <h2>국민과 함께, 새로운 미래로</h2>
+        <p>더 나은 내일을 위해 앞장서는 정당이 되겠습니다.</p>
+        <a href="#policy" style="background:var(--secondary-color); color:white; padding:15px 30px; border-radius:30px; font-weight:bold; font-size:1.1rem; box-shadow: 0 4px 15px rgba(0,0,0,0.3); transition:all 0.3s;">우리의 공약 보기</a>
+    </section>
+
+    <!-- 정당 소개 -->
+    <section id="about" style="background-color: #fff;">
+        <h2 class="section-title">정당 소개</h2>
+        <div class="card-container">
+            <div class="card">
+                <h3>비전 및 가치</h3>
+                <p>공정하고 정의로운 사회 구현. 모든 국민이 차별 없이 기회를 보장받는 따뜻한 공동체를 만들어 갑니다.</p>
+            </div>
+            <div class="card">
+                <h3>조직도</h3>
+                <p>국민의 목소리를 가장 가까이에서 듣기 위해 수평적이고 체계적인 조직을 구성하여 운영하고 있습니다.</p>
+            </div>
+            <div class="card">
+                <h3>주요 인물</h3>
+                <p><strong>대표:</strong> 홍길동<br><strong>원내대표:</strong> 김철수<br>국민을 위해 헌신하는 든든한 리더들입니다.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 정책 -->
+    <section id="policy">
+        <h2 class="section-title">핵심 정책 / 공약</h2>
+        <div class="card-container">
+            <div class="card" style="border-top-color: #e53935;">
+                <h3 style="color:#e53935;">경제</h3>
+                <p>중소기업 및 소상공인 지원을 대폭 확대하고, 신성장 동력을 육성하여 활력 있는 경제를 구축합니다.</p>
+            </div>
+            <div class="card" style="border-top-color: #43a047;">
+                <h3 style="color:#43a047;">복지</h3>
+                <p>요람에서 무덤까지, 사각지대 없는 기본 복지를 강화하여 국민의 삶의 질을 획기적으로 높입니다.</p>
+            </div>
+            <div class="card" style="border-top-color: #fdd835;">
+                <h3 style="color:#fbc02d;">교육</h3>
+                <p>미래 세대를 위한 공교육 혁신과 평생 교육 시스템 구축으로 모두가 함께 성장하는 기반을 마련합니다.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 뉴스 -->
+    <section id="news" style="background-color: #fff;">
+        <h2 class="section-title">최신 뉴스 / 공지</h2>
+        <div style="max-width: 1000px; margin: 0 auto;">
+            <table class="news-table">
+                <thead>
+                    <tr>
+                        <th style="width: 10%;">번호</th>
+                        <th style="width: 70%;">제목</th>
+                        <th style="width: 20%;">작성일</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- 데이터베이스 연동 영역 -->
+                    <% if (news && news.length > 0) { %>
+                        <% news.forEach(function(item) { %>
+                            <tr>
+                                <td><%= item.id %></td>
+                                <td><%= item.title %></td>
+                                <td><%= item.date %></td>
+                            </tr>
+                        <% }); %>
+                    <% } else { %>
+                        <tr>
+                            <td colspan="3">등록된 뉴스가 없습니다.</td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+            
+            <div style="margin-top: 30px; display: flex; justify-content: flex-end;">
+                <form style="display: flex; gap: 10px;" action="#" method="GET">
+                    <input type="text" name="q" placeholder="검색어 입력" style="padding: 10px; border: 1px solid #ccc; border-radius: 4px; width: 250px;">
+                    <button type="submit" style="background: var(--primary-color); color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer;">검색</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- 참여 -->
+    <section id="contact">
+        <h2 class="section-title">참여 / 소통</h2>
+        <div class="form-container">
+            <h3 style="margin-bottom: 20px; color: var(--primary-color); text-align: center;">당원 가입 및 문의</h3>
+            <!-- API 연동 폼 -->
+            <form action="/api/inquiry" method="POST">
+                <div class="form-group">
+                    <label>이름</label>
+                    <input type="text" name="name" placeholder="홍길동" required>
+                </div>
+                <div class="form-group">
+                    <label>이메일</label>
+                    <input type="email" name="email" placeholder="example@domain.com" required>
+                </div>
+                <div class="form-group">
+                    <label>문의 및 의견</label>
+                    <textarea name="message" rows="5" placeholder="자유롭게 의견을 남겨주세요..." required></textarea>
+                </div>
+                <button type="submit" class="btn">제출하기</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- 푸터 -->
+    <footer>
+        <h3 style="color: #fff; margin-bottom: 10px;">미래정당</h3>
+        <p>서울특별시 영등포구 국회대로 1 미래빌딩 1층 | 대표전화 : 02-123-4567 | 이메일 : contact@futureparty.or.kr</p>
+        <p style="margin-top: 20px; font-size: 0.9rem; color: #777;">© 2026 미래정당. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
