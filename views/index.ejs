@@ -792,8 +792,34 @@ header {
   letter-spacing:-0.01em;
 }
 .chart-info .ci-sub {
-  font-size:12px;color:var(--muted);
-  margin-bottom:8px;
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 4px;
+}
+.chart-ott-wrap {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+.ott-badge {
+  font-size: 9px;
+  padding: 2px 6px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border);
+  color: var(--teal);
+  text-transform: uppercase;
+  font-weight: 700;
+}
+.chart-review {
+  font-size: 11px;
+  color: var(--text);
+  font-style: italic;
+  opacity: 0.8;
+  margin-top: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 300px;
 }
 .chart-bar-wrap {
   height:3px;
@@ -1182,7 +1208,6 @@ footer {
   </a>
   <nav class="nav-links">
     <a href="#" class="active">홈</a>
-    <a href="#trending">인기</a>
     <a href="#genre">장르</a>
     <a href="#chart">랭킹</a>
     <a href="#reviews">리뷰</a>
@@ -1344,19 +1369,7 @@ footer {
   </div>
 </div>
 
-<!-- ═══════════════ TRENDING ═══════════════ -->
-<section class="section" id="trending">
-  <div class="section-header reveal">
-    <div>
-      <div class="section-eyebrow"><div class="eyebrow-line"></div><span>Trending Now</span></div>
-      <h2 class="section-title">지금 뜨는 영화</h2>
-    </div>
-    <button class="view-all">전체 보기 →</button>
-  </div>
-  <div class="movie-grid reveal" id="movieGrid">
-    <!-- Dynamically rendered -->
-  </div>
-</section>
+
 
 <!-- ═══════════════ EDITORIAL ═══════════════ -->
 <section class="section section-alt">
@@ -1588,25 +1601,23 @@ footer {
 <script>
 // ── DATA ──
 const movies = [
-  {id:0, title:'인터스텔라', genre:'sci-fi', genreLabel:'SF · 스릴러', year:2014, runtime:'169분', director:'크리스토퍼 놀란', rating:9.0, badge:'', desc:'지구 종말을 앞두고 인류의 새로운 터전을 찾아 우주로 떠나는 탐험대의 이야기. 블랙홀과 웜홀을 통해 시간과 공간을 초월한 여정이 펼쳐진다.', cast:['매튜 맥커너히','앤 해서웨이','제시카 차스테인'], color:'rgba(46,196,182,0.08)', stroke:'#2EC4B6'},
-  {id:1, title:'매트릭스 리저렉션즈', genre:'sci-fi', genreLabel:'SF · 액션', year:2021, runtime:'148분', director:'라나 워쇼스키', rating:8.1, badge:'NEW', desc:'20년 만에 돌아온 매트릭스 세계. 토마스 앤더슨은 또다시 진실에 눈을 떠야 한다.', cast:['키아누 리브스','캐리앤 모스','야훼 아브둘-마틴 2세'], color:'rgba(46,196,182,0.08)', stroke:'#2EC4B6'},
-  {id:2, title:'오펜하이머', genre:'drama', genreLabel:'드라마 · 전기', year:2023, runtime:'180분', director:'크리스토퍼 놀란', rating:8.9, badge:'HOT', desc:'원자폭탄의 아버지 로버트 오펜하이머의 삶과 도덕적 갈등을 그린 역사 드라마.', cast:['킬리언 머피','에밀리 블런트','맷 데이먼'], color:'rgba(230,57,70,0.08)', stroke:'#E63946'},
-  {id:3, title:'듄: 파트2', genre:'sci-fi', genreLabel:'SF · 어드벤처', year:2024, runtime:'166분', director:'드니 빌뇌브', rating:8.7, badge:'', desc:'사막 행성 아라키스에서 폴 아트레이데스의 복수가 시작된다. 압도적인 스케일의 SF 서사시.', cast:['티모시 샬라메','젠데이아','레베카 퍼거슨'], color:'rgba(244,162,97,0.08)', stroke:'#F4A261'},
-  {id:4, title:'더 배트맨', genre:'action', genreLabel:'액션 · 범죄', year:2022, runtime:'176분', director:'맷 리브스', rating:8.5, badge:'', desc:'고담시의 연쇄 살인마 리들러를 추적하는 배트맨의 이야기. 어둡고 누아르적인 분위기.', cast:['로버트 패틴슨','조이 크라비츠','폴 다노'], color:'rgba(201,195,184,0.06)', stroke:'#C9C3B8'},
-  {id:5, title:'탑건: 매버릭', genre:'action', genreLabel:'액션 · 드라마', year:2022, runtime:'131분', director:'조셉 코신스키', rating:8.6, badge:'HOT', desc:'36년 만에 귀환한 매버릭. 최고의 전투 조종사들을 이끌고 불가능한 임무에 나선다.', cast:['톰 크루즈','마일스 텔러','제니퍼 코넬리'], color:'rgba(46,196,182,0.06)', stroke:'#2EC4B6'},
-  {id:6, title:'기생충', genre:'thriller', genreLabel:'스릴러 · 드라마', year:2019, runtime:'132분', director:'봉준호', rating:9.2, badge:'', desc:'반지하 가족과 부유한 박 사장 가족이 얽히며 벌어지는 예측불허의 이야기.', cast:['송강호','이선균','조여정'], color:'rgba(201,195,184,0.06)', stroke:'#C9C3B8'},
-  {id:7, title:'스파이더맨: 노 웨이 홈', genre:'action', genreLabel:'액션 · SF', year:2021, runtime:'148분', director:'존 왓츠', rating:8.8, badge:'', desc:'정체가 밝혀진 피터 파커가 멀티버스를 열며 과거의 빌런들과 마주하게 된다.', cast:['톰 홀랜드','젠데이아','베네딕트 컴버배치'], color:'rgba(230,57,70,0.08)', stroke:'#E63946'},
-  {id:8, title:'라라랜드', genre:'romance', genreLabel:'로맨스 · 뮤지컬', year:2016, runtime:'128분', director:'다미엔 셔젤', rating:8.4, badge:'', desc:'꿈을 좇는 재즈 피아니스트와 배우 지망생의 사랑과 열정, 그리고 이별 이야기.', cast:['라이언 고슬링','엠마 스톤'], color:'rgba(244,162,97,0.06)', stroke:'#F4A261'},
-  {id:9, title:'어벤져스: 엔드게임', genre:'action', genreLabel:'액션 · SF', year:2019, runtime:'181분', director:'루소 형제', rating:9.0, badge:'', desc:'타노스의 스냅 이후 5년, 마블 히어로들의 마지막 역전 작전이 시작된다.', cast:['로버트 다우니 주니어','크리스 에반스','마크 러팔로'], color:'rgba(230,57,70,0.06)', stroke:'#E63946'},
-  {id:10, title:'조커', genre:'thriller', genreLabel:'스릴러 · 범죄', year:2019, runtime:'122분', director:'토드 필립스', rating:8.7, badge:'', desc:'코미디언 꿈을 접고 빌런으로 변해가는 아서 플렉의 비극적 이야기.', cast:['호아킨 피닉스','로버트 드 니로'], color:'rgba(201,195,184,0.06)', stroke:'#C9C3B8'},
-  {id:11, title:'미나리', genre:'drama', genreLabel:'드라마', year:2020, runtime:'115분', director:'정이삭', rating:8.3, badge:'', desc:'1980년대 아메리칸 드림을 좇아 미국 아칸소 주로 이주한 한국계 이민자 가족의 이야기.', cast:['스티븐 연','한예리','윤여정'], color:'rgba(244,162,97,0.06)', stroke:'#F4A261'},
+  {id:0, title:'듄: 파트2', genre:'sci-fi', genreLabel:'SF · 어드벤처', year:2024, runtime:'166분', director:'드니 빌뇌브', rating:9.1, badge:'HOT', desc:'사막 행성 아라키스에서 폴 아트레이데스의 복수가 시작된다. 압도적인 스케일의 SF 서사시.', cast:['티모시 샬라메','젠데이아'], color:'rgba(244,162,97,0.08)', stroke:'#F4A261', ott:['Tving', 'Netflix'], ottReview:'"시각적 경이로움의 극치"'},
+  {id:1, title:'퓨리오사: 매드맥스 사가', genre:'action', genreLabel:'액션 · SF', year:2024, runtime:'148분', director:'조지 밀러', rating:8.8, badge:'NEW', desc:'문명 붕괴 45년 전, 어린 퓨리오사가 시타델의 폭군 임모탄 조에게 맞서 고향으로 돌아가기 위해 벌이는 사투.', cast:['안야 테일러 조이','크리스 헴스워스'], color:'rgba(230,57,70,0.08)', stroke:'#E63946', ott:['Disney+', 'Wavve'], ottReview:'"조지 밀러의 멈추지 않는 에너지"'},
+  {id:2, title:'아바타: 불과 재', genre:'sci-fi', genreLabel:'SF · 판타지', year:2025, runtime:'160분', director:'제임스 카메론', rating:9.5, badge:'UPCOMING', desc:'판도라 행성의 새로운 부족과의 조우, 그리고 끝나지 않은 위협에 맞서는 설리 가족의 여정.', cast:['샘 워딩턴','조 샐다나'], color:'rgba(46,196,182,0.08)', stroke:'#2EC4B6', ott:['Disney+'], ottReview:'"기술력이 선사하는 또 다른 진화"'},
+  {id:3, title:'더 배트맨 파트 2', genre:'action', genreLabel:'액션 · 범죄', year:2026, runtime:'175분', director:'맷 리브스', rating:9.2, badge:'UPCOMING', desc:'고담시의 어둠 속에 도사린 새로운 위협. 브루스 웨인의 더욱 깊어진 고뇌와 사투.', cast:['로버트 패틴슨'], color:'rgba(201,195,184,0.06)', stroke:'#C9C3B8', ott:['Netflix', 'Apple TV+'], ottReview:'"최고의 누아르 히어로물"'},
+  {id:4, title:'슈퍼맨', genre:'action', genreLabel:'액션 · SF', year:2025, runtime:'150분', director:'제임스 건', rating:8.9, badge:'UPCOMING', desc:'DC 유니버스의 새로운 시작. 클라크 켄트가 자신의 유산과 인간미 사이에서 균형을 찾아가는 이야기.', cast:['데이비드 코런스웻'], color:'rgba(46,196,182,0.06)', stroke:'#2EC4B6', ott:['Tving'], ottReview:'"밝고 희망찬 슈퍼맨의 귀환"'},
+  {id:5, title:'글래디에이터 II', genre:'action', genreLabel:'액션 · 드라마', year:2024, runtime:'155분', director:'리들리 스콧', rating:8.5, badge:'', desc:'콜로세움의 전설이 다시 시작된다. 로마의 운명을 건 장대한 결투와 음모.', cast:['폴 메스칼','덴젤 워싱턴'], color:'rgba(230,57,70,0.06)', stroke:'#E63946', ott:['Watcha', 'Netflix'], ottReview:'"리들리 스콧의 장엄한 서사"'},
+  {id:6, title:'조커: 폴리 아 되', genre:'thriller', genreLabel:'스릴러 · 드라마', year:2024, runtime:'138분', director:'토드 필립스', rating:8.0, badge:'', desc:'아캄 수용소에서 만난 할리 퀸과 조커의 뒤틀린 사랑과 광기의 뮤지컬 드라마.', cast:['호아킨 피닉스','레이디 가가'], color:'rgba(201,195,184,0.06)', stroke:'#C9C3B8', ott:['Netflix'], ottReview:'"호아킨 피닉스의 압도적 연기"'},
+  {id:7, title:'소닉 더 헤지혹 3', genre:'animation', genreLabel:'애니메이션 · 액션', year:2024, runtime:'110분', director:'제프 파울러', rating:8.3, badge:'', desc:'새로운 강적 섀도우의 등장. 소닉과 친구들의 더욱 화려해진 스피드 액션.', cast:['벤 슈와츠','키아누 리브스'], color:'rgba(0,26,26,0.08)', stroke:'#001A1A', ott:['Tving', 'Wavve'], ottReview:'"섀도우의 등장이 신의 한 수"'},
+  {id:8, title:'어벤져스: 둠스데이', genre:'action', genreLabel:'액션 · SF', year:2026, runtime:'180분', director:'루소 형제', rating:9.4, badge:'UPCOMING', desc:'멀티버스의 위기 속에서 나타난 닥터 둠. 어벤져스 멤버들의 사활을 건 운명의 대결.', cast:['로버트 다우니 주니어'], color:'rgba(230,57,70,0.08)', stroke:'#E63946', ott:['Disney+'], ottReview:'"마블의 화려한 부활 예고"'},
+  {id:9, title:'스파이더맨: 비욘드 더 스파이더-버스', genre:'animation', genreLabel:'애니메이션 · SF', year:2026, runtime:'140분', director:'호아킴 도스 산토스', rating:9.6, badge:'UPCOMING', desc:'마일즈 모랄레스의 대장정이 막을 내린다. 스파이더-버스를 수호하기 위한 마지막 결전.', cast:['샤메익 무어'], color:'rgba(46,196,182,0.08)', stroke:'#2EC4B6', ott:['Netflix'], ottReview:'"애니메이션 역사를 새로 쓰다"'},
 ];
 
 const heroData = [
-  {title:'인터스텔라', genre:'SF · 스릴러', meta:'2014 · 169분 · 크리스토퍼 놀란', desc:'지구 종말을 앞두고 인류의 새로운 터전을 찾아 우주로 떠나는 탐험대의 이야기.', idx:0},
-  {title:'오펜하이머', genre:'드라마 · 전기', meta:'2023 · 180분 · 크리스토퍼 놀란', desc:'원자폭탄의 아버지 오펜하이머의 삶과 도덕적 갈등을 그린 역사 드라마.', idx:2},
-  {title:'듄: 파트2', genre:'SF · 어드벤처', meta:'2024 · 166분 · 드니 빌뇌브', desc:'사막 행성 아라키스에서 폴 아트레이데스의 복수가 시작되는 장엄한 SF 서사시.', idx:3},
-  {title:'기생충', genre:'스릴러 · 드라마', meta:'2019 · 132분 · 봉준호', desc:'반지하 가족과 부유한 가족이 얽히며 벌어지는 예측불허의 이야기. 칸영화제 황금종려상.', idx:6},
+  {title:'듄: 파트2', genre:'SF · 어드벤처', meta:'2024 · 166분 · 드니 빌뇌브', desc:'사막 행성 아라키스에서 폴 아트레이데스의 복수가 시작되는 장엄한 SF 서사시.', idx:0},
+  {title:'아바타: 불과 재', genre:'SF · 판타지', meta:'2025 · 160분 · 제임스 카메론', desc:'판도라 행성의 새로운 부족과의 조우, 그리고 끝나지 않은 위협에 맞서는 설리 가족의 여정.', idx:2},
+  {title:'스파이더맨: 비욘드 더 스파이더-버스', genre:'애니메이션 · SF', meta:'2026 · 140분 · 호아킴 도스 산토스', desc:'마일즈 모랄레스의 대장정이 막을 내린다. 스파이더-버스를 수호하기 위한 마지막 결전.', idx:9},
+  {title:'슈퍼맨', genre:'액션 · SF', meta:'2025 · 150분 · 제임스 건', desc:'DC 유니버스의 새로운 시작. 클라크 켄트가 자신의 유산과 인간미 사이에서 균형을 찾아가는 이야기.', idx:4},
 ];
 
 // ── POSTER ICONS ──
@@ -1700,7 +1711,10 @@ function renderChart(){
       <div class="chart-info">
         <div class="ci-title">${m.title}</div>
         <div class="ci-sub">${m.director} · ${m.year}</div>
-        <div class="chart-bar-wrap"><div class="chart-bar" style="width:${(m.rating/10)*100}%"></div></div>
+        <div class="chart-ott-wrap">
+          ${m.ott.map(o => `<span class="ott-badge">${o}</span>`).join('')}
+        </div>
+        <div class="chart-review">${m.ottReview}</div>
       </div>
       <div class="chart-score">${m.rating}<small>/ 10</small></div>
     </div>`).join('');
@@ -1724,7 +1738,7 @@ function setFilterDirect(f){
     b.classList.toggle('active', b.textContent.toLowerCase()===genreMap[f]);
   });
   renderGrid();
-  document.getElementById('trending').scrollIntoView({behavior:'smooth'});
+  document.getElementById('chart').scrollIntoView({behavior:'smooth'});
 }
 const genreMap={'action':'액션','sci-fi':'sf','drama':'드라마','thriller':'스릴러','romance':'로맨스','comedy':'코미디','horror':'공포','animation':'애니메이션'};
 function sortMovies(v){currentSort=v;renderGrid();}
