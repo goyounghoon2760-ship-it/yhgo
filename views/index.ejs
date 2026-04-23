@@ -1437,35 +1437,16 @@ footer {
 </section>
 
 <!-- ═══════════════ REVIEWS ═══════════════ -->
-<section class="section" id="reviews">
+<section class="section section-alt" id="nowPlaying">
   <div class="section-header reveal">
     <div>
-      <div class="section-eyebrow"><div class="eyebrow-line"></div><span>Critics</span></div>
-      <h2 class="section-title">관람객 리뷰</h2>
+      <div class="section-eyebrow"><div class="eyebrow-line"></div><span>Now In Cinema</span></div>
+      <h2 class="section-title">현재 상영중</h2>
     </div>
+    <div class="view-all" style="color:var(--amber)">네이버 기준 실시간 랭킹</div>
   </div>
-  <div class="review-grid reveal">
-    <div class="review-card">
-      <div class="review-stars">★★★★★</div>
-      <div class="review-text">"로버트 다우니 주니어의 복귀만으로도 2026년은 전설이 될 것이다. 닥터 둠의 등장이 기대된다."</div>
-      <div class="review-divider"></div>
-      <div class="review-movie">어벤져스: 둠스데이</div>
-      <div class="review-author">김태영 · 2026.01.05</div>
-    </div>
-    <div class="review-card">
-      <div class="review-stars">★★★★★</div>
-      <div class="review-text">"맷 리브스의 고담시는 더욱 깊고 어두워졌다. 로버트 패틴슨의 고뇌가 벌써부터 느껴진다."</div>
-      <div class="review-divider"></div>
-      <div class="review-movie">더 배트맨 파트 2</div>
-      <div class="review-author">이수현 · 2026.03.22</div>
-    </div>
-    <div class="review-card">
-      <div class="review-stars">★★★★☆</div>
-      <div class="review-text">"우디와 버즈의 다섯 번째 이야기가 필요할까 싶었지만, 시놉시스만으로도 가슴이 뛴다."</div>
-      <div class="review-divider"></div>
-      <div class="review-movie">토이 스토리 5</div>
-      <div class="review-author">박지민 · 2026.06.12</div>
-    </div>
+  <div class="scroll-row reveal" id="nowPlayingRow">
+    <!-- JS: renderNowPlaying() -->
   </div>
 </section>
 
@@ -1654,6 +1635,34 @@ const movies = [
     poster:'https://images.unsplash.com/photo-1566576721346-d4a3b4eaeb55?w=800&q=80',
     ott:['Netflix'], ottReview:'"전작을 뛰어넘는 화려한 영상미"'
   },
+  {
+    id:10, title:'마인크래프트 무비', genre:'action', genreLabel:'어드벤처 · 판타지', year:2026, runtime:'110분', director:'자레드 헤스', rating:8.7, badge:'NOW', 
+    desc:'모든 것이 블록으로 이루어진 기상천외한 세상. 마인크래프트 세계에 떨어진 네 명의 이방인들이 창의력을 발휘해 집으로 돌아가기 위한 모험을 시작한다. 게임의 독창적인 세계관을 완벽하게 구현한 영상미.', 
+    cast:['제이슨 모모아', '잭 블랙'], color:'rgba(230,57,70,0.06)', stroke:'#E63946', 
+    poster:'https://images.unsplash.com/photo-1511512578047-dfb367046420?w=800&q=80',
+    ott:['Tving', 'Coupang Play'], ottReview:'"상상력이 블록처럼 쌓이는 영화"'
+  },
+  {
+    id:11, title:'더 캣', genre:'animation', genreLabel:'애니메이션 · 코미디', year:2026, runtime:'95분', director:'에리카 리비노야', rating:8.9, badge:'NOW', 
+    desc:'닥터 수스의 고전 명작이 새로운 애니메이션으로 탄생했다. 지루한 오후를 보내던 남매에게 찾아온 모자 쓴 고양이의 엉뚱하고 발랄한 소동극. 동심을 자극하는 화려한 색채와 유쾌한 유머.', 
+    cast:['빌 헤이더'], color:'rgba(46,196,182,0.08)', stroke:'#2EC4B6', 
+    poster:'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=800&q=80',
+    ott:['Netflix', 'Disney+'], ottReview:'"모두를 위한 따뜻하고 유쾌한 동화"'
+  },
+  {
+    id:12, title:'범죄도시 6', genre:'action', genreLabel:'액션 · 범죄', year:2026, runtime:'115분', director:'이상용', rating:9.3, badge:'NOW', 
+    desc:'대한민국 대표 괴물형사 마석도, 이번엔 글로벌 마약 조직을 소탕하기 위해 나선다! 더욱 강력해진 한방 액션과 쉴 새 없이 터지는 유머. 네이버 평점 9.3점을 기록하며 흥행 돌풍을 일으키고 있는 화제작.', 
+    cast:['마동석'], color:'rgba(230,57,70,0.08)', stroke:'#E63946', 
+    poster:'https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=800&q=80',
+    ott:['Coupang Play'], ottReview:'"역시 믿고 보는 마동석 액션"'
+  },
+  {
+    id:13, title:'하얼빈 2', genre:'action', genreLabel:'액션 · 시대극', year:2026, runtime:'130분', director:'우민호', rating:9.5, badge:'NOW', 
+    desc:'안중근 의사의 거사 그 이후, 남겨진 독립투사들의 치열한 사투를 그린 대작. 1편의 감동을 잇는 장엄한 서사와 배우들의 명연기가 돋보인다. 현재 네이버 박스오피스 상위권을 지키고 있는 올 상반기 최고의 기대작.', 
+    cast:['현빈', '박정민', '조우진'], color:'rgba(201,195,184,0.06)', stroke:'#C9C3B8', 
+    poster:'https://images.unsplash.com/photo-1599508704512-2f19fe91f15e?w=800&q=80',
+    ott:['Netflix'], ottReview:'"가슴 뜨거워지는 독립군들의 이야기"'
+  },
 ];
 
 const heroData = [
@@ -1771,8 +1780,13 @@ function renderChart(){
 }
 
 function renderNewRelease(){
-  const recent = [...movies].sort((a,b)=>b.year-a.year).slice(0,8);
+  const recent = [...movies].filter(m=>m.badge==='UPCOMING').sort((a,b)=>b.year-a.year).slice(0,8);
   document.getElementById('newReleaseRow').innerHTML = recent.map(m=>buildCard(m,true)).join('');
+}
+
+function renderNowPlaying(){
+  const playing = [...movies].filter(m=>m.badge==='NOW').sort((a,b)=>b.rating-a.rating);
+  document.getElementById('nowPlayingRow').innerHTML = playing.map(m=>buildCard(m,true)).join('');
 }
 
 function filterMovies(){renderGrid();}
@@ -1881,6 +1895,7 @@ document.querySelectorAll('.reveal').forEach(el=>revObs.observe(el));
 renderGrid();
 renderChart();
 renderNewRelease();
+renderNowPlaying();
 
 // Lazy re-observe after render
 setTimeout(()=>{
