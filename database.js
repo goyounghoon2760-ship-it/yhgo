@@ -8,9 +8,9 @@ if (process.env.VERCEL) {
     db = {
         all: (query, params, cb) => {
             cb(null, [
-                { id: 3, title: "이재명 대통령, 2026년도 예산안 728조원 확정…AI·R&D 분야 집중 투자", date: "2026. 04. 22" },
-                { id: 2, title: "민생회복 소비쿠폰, 전 국민 지급 완료", date: "2026. 04. 20" },
-                { id: 1, title: "한미 정상회담 개최…동맹 강화 및 경제협력 논의", date: "2026. 04. 18" }
+                { id: 3, title: "이재명 대통령, 2026년도 예산안 728조원 확정…AI·R&D 분야 집중 투자", date: "2026. 04. 22", link: "https://search.naver.com/search.naver?query=이재명+대통령+예산안" },
+                { id: 2, title: "민생회복 소비쿠폰, 전 국민 지급 완료", date: "2026. 04. 20", link: "https://search.naver.com/search.naver?query=이재명+민생회복지원금" },
+                { id: 1, title: "한미 정상회담 개최…동맹 강화 및 경제협력 논의", date: "2026. 04. 18", link: "https://search.naver.com/search.naver?query=이재명+한미정상회담" }
             ]);
         },
         run: (query, params, cb) => {
@@ -35,11 +35,14 @@ if (process.env.VERCEL) {
     });
 
     db.serialize(() => {
-        db.run(`CREATE TABLE IF NOT EXISTS news (
+        db.run("DROP TABLE IF EXISTS news"); // 새 스키마 적용을 위해 기존 테이블 초기화
+
+        db.run(`CREATE TABLE news (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             title TEXT,
             content TEXT,
-            date TEXT
+            date TEXT,
+            link TEXT
         )`);
 
         db.run(`CREATE TABLE IF NOT EXISTS inquiries (
@@ -52,10 +55,10 @@ if (process.env.VERCEL) {
 
         db.get("SELECT COUNT(*) as count FROM news", (err, row) => {
             if (!err && row.count === 0) {
-                const stmt = db.prepare("INSERT INTO news (title, content, date) VALUES (?, ?, ?)");
-                stmt.run("이재명 대통령, 2026년도 예산안 728조원 확정…AI·R&D 분야 집중 투자", "내용 없음", "2026. 04. 22");
-                stmt.run("민생회복 소비쿠폰, 전 국민 지급 완료", "내용 없음", "2026. 04. 20");
-                stmt.run("한미 정상회담 개최…동맹 강화 및 경제협력 논의", "내용 없음", "2026. 04. 18");
+                const stmt = db.prepare("INSERT INTO news (title, content, date, link) VALUES (?, ?, ?, ?)");
+                stmt.run("이재명 대통령, 2026년도 예산안 728조원 확정…AI·R&D 분야 집중 투자", "내용 없음", "2026. 04. 22", "https://search.naver.com/search.naver?query=이재명+대통령+예산안");
+                stmt.run("민생회복 소비쿠폰, 전 국민 지급 완료", "내용 없음", "2026. 04. 20", "https://search.naver.com/search.naver?query=이재명+민생회복지원금");
+                stmt.run("한미 정상회담 개최…동맹 강화 및 경제협력 논의", "내용 없음", "2026. 04. 18", "https://search.naver.com/search.naver?query=이재명+한미정상회담");
                 stmt.finalize();
                 console.log("Seeded initial news data.");
             }
