@@ -1381,11 +1381,7 @@ footer {
   </div>
   <div class="editorial-grid reveal">
     <div class="editorial-main" onclick="openModal(0)">
-      <div class="ed-bg ed-main-bg">
-        <svg class="poster-icon" width="120" height="160" viewBox="0 0 120 160" fill="none" opacity="0.2">
-          <rect x="10" y="10" width="100" height="140" rx="4" stroke="#E63946" stroke-width="2"/>
-          <polygon points="40,60 80,80 40,100" fill="#E63946"/>
-        </svg>
+      <div class="ed-bg ed-main-bg" style="background: url('https://images.unsplash.com/photo-1612036782180-6f0b6cd846fe?w=1000&q=80') center/cover no-repeat;">
       </div>
       <div class="ed-overlay">
         <div class="ed-badge">★ 2026 기대작</div>
@@ -1395,10 +1391,7 @@ footer {
     </div>
     <div class="editorial-side">
       <div class="editorial-item" onclick="openModal(1)">
-        <div class="ed-bg ed-side1-bg" style="min-height:200px">
-          <svg class="poster-icon" width="80" height="100" viewBox="0 0 80 100" fill="none" opacity="0.2">
-            <path d="M10 30 Q40 10 70 30" stroke="#C9C3B8" stroke-width="2"/>
-          </svg>
+        <div class="ed-bg ed-side1-bg" style="min-height:200px; background: url('https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=800&q=80') center/cover no-repeat;">
         </div>
         <div class="ed-overlay">
           <div class="ed-badge">NEW</div>
@@ -1407,10 +1400,7 @@ footer {
         </div>
       </div>
       <div class="editorial-item" onclick="openModal(3)">
-        <div class="ed-bg ed-side2-bg" style="min-height:200px">
-          <svg class="poster-icon" width="80" height="100" viewBox="0 0 80 100" fill="none" opacity="0.2">
-            <circle cx="40" cy="50" r="30" stroke="#2EC4B6" stroke-width="2"/>
-          </svg>
+        <div class="ed-bg ed-side2-bg" style="min-height:200px; background: url('https://images.unsplash.com/photo-1594909122845-11baa439b7bf?w=800&q=80') center/cover no-repeat;">
         </div>
         <div class="ed-overlay">
           <div class="ed-badge">HOT</div>
@@ -1594,16 +1584,76 @@ footer {
 <script>
 // ── DATA ──
 const movies = [
-  {id:0, title:'어벤져스: 둠스데이', genre:'action', genreLabel:'액션 · SF', year:2026, runtime:'180분', director:'루소 형제', rating:9.4, badge:'UPCOMING', desc:'멀티버스의 위기 속에서 나타난 닥터 둠. 어벤져스 멤버들의 사활을 건 운명의 대결.', cast:['로버트 다우니 주니어'], color:'rgba(230,57,70,0.08)', stroke:'#E63946', ott:['Disney+'], ottReview:'"마블의 화려한 부활 예고"'},
-  {id:1, title:'더 배트맨 파트 2', genre:'action', genreLabel:'액션 · 범죄', year:2026, runtime:'175분', director:'맷 리브스', rating:9.2, badge:'UPCOMING', desc:'고담시의 어둠 속에 도사린 새로운 위협. 브루스 웨인의 더욱 깊어진 고뇌와 사투.', cast:['로버트 패틴슨'], color:'rgba(201,195,184,0.06)', stroke:'#C9C3B8', ott:['Netflix', 'Apple TV+'], ottReview:'"최고의 누아르 히어로물"'},
-  {id:2, title:'스파이더맨: 비욘드 더 스파이더-버스', genre:'animation', genreLabel:'애니메이션 · SF', year:2026, runtime:'140분', director:'호아킴 도스 산토스', rating:9.6, badge:'UPCOMING', desc:'마일즈 모랄레스의 대장정이 막을 내린다. 스파이더-버스를 수호하기 위한 마지막 결전.', cast:['샤메익 무어'], color:'rgba(46,196,182,0.08)', stroke:'#2EC4B6', ott:['Netflix'], ottReview:'"애니메이션 역사를 새로 쓰다"'},
-  {id:3, title:'토이 스토리 5', genre:'animation', genreLabel:'애니메이션 · 코미디', year:2026, runtime:'105분', director:'앤드류 스탠튼', rating:9.0, badge:'UPCOMING', desc:'우디와 버즈, 그리고 새로운 장난감 친구들의 가슴 뭉클한 다섯 번째 여정.', cast:['톰 행크스','팀 알렌'], color:'rgba(46,196,182,0.08)', stroke:'#2EC4B6', ott:['Disney+'], ottReview:'"가족 모두를 위한 완벽한 귀환"'},
-  {id:4, title:'프로젝트 하일메리', genre:'sci-fi', genreLabel:'SF · 드라마', year:2026, runtime:'150분', director:'필 로드', rating:9.5, badge:'HOT', desc:'인류를 구하기 위해 태양계 밖으로 떠난 과학자 라이언드의 사투와 우정.', cast:['라이언 고슬링'], color:'rgba(244,162,97,0.08)', stroke:'#F4A261', ott:['Apple TV+'], ottReview:'"마션 그 이상의 우주 서사"'},
-  {id:5, title:'슈렉 5', genre:'animation', genreLabel:'애니메이션 · 코미디', year:2026, runtime:'110분', director:'월트 도른', rating:8.8, badge:'NEW', desc:'겁나 먼 왕국으로 돌아온 슈렉과 친구들. 더욱 강력해진 웃음과 모험.', cast:['마이크 마이어스','에디 머피'], color:'rgba(46,196,182,0.06)', stroke:'#2EC4B6', ott:['Netflix'], ottReview:'"추억과 재미를 모두 잡은 속편"'},
-  {id:6, title:'모아나 (실사)', genre:'action', genreLabel:'어드벤처 · 판타지', year:2026, runtime:'130분', director:'토마스 케일', rating:8.5, badge:'NEW', desc:'바다가 선택한 소녀 모아나와 전설의 영웅 마우이의 장엄한 모험이 실사로 펼쳐진다.', cast:['드웨인 존슨'], color:'rgba(230,57,70,0.06)', stroke:'#E63946', ott:['Disney+'], ottReview:'"시각적 완성도가 뛰어난 실사화"'},
-  {id:7, title:'더 만달로리안 & 그로구', genre:'action', genreLabel:'SF · 액션', year:2026, runtime:'135분', director:'존 파브로', rating:9.1, badge:'UPCOMING', desc:'만달로리안 딘 자린과 신비로운 아이 그로구의 은하계를 누비는 새로운 여정.', cast:['페드로 파스칼'], color:'rgba(201,195,184,0.06)', stroke:'#C9C3B8', ott:['Disney+'], ottReview:'"스타워즈 팬들을 위한 최고의 선물"'},
-  {id:8, title:'슈퍼걸: 우먼 오브 투모로우', genre:'action', genreLabel:'액션 · SF', year:2026, runtime:'140분', director:'크레이그 길레스피', rating:8.9, badge:'UPCOMING', desc:'슈퍼맨과는 또 다른 길을 걷는 카라 조엘의 대담하고 강렬한 성장기.', cast:['밀리 알콕'], color:'rgba(230,57,70,0.08)', stroke:'#E63946', ott:['Tving'], ottReview:'"DC 유니버스의 새로운 중심축"'},
-  {id:9, title:'슈퍼 마리오 브라더스 2', genre:'animation', genreLabel:'애니메이션 · 어드벤처', year:2026, runtime:'115분', director:'애런 호바스', rating:9.2, badge:'UPCOMING', desc:'버섯 왕국을 넘어 더 넓은 세상으로 나가는 마리오와 루이지의 화려한 스피드 액션.', cast:['크리스 프랫'], color:'rgba(244,162,97,0.08)', stroke:'#F4A261', ott:['Netflix'], ottReview:'"전작을 뛰어넘는 화려한 영상미"'},
+  {
+    id:0, title:'어벤져스: 둠스데이', genre:'action', genreLabel:'액션 · SF', year:2026, runtime:'180분', director:'루소 형제', rating:9.4, badge:'UPCOMING', 
+    desc:'로버트 다우니 주니어가 닥터 둠으로 돌아온다! 멀티버스의 질서가 완전히 붕괴된 가운데, 새로운 절대 위협에 맞서 흩어졌던 어벤져스 멤버들이 다시 집결한다. 시간과 공간을 초월한 장대한 전투와 함께 마블 시네마틱 유니버스의 새로운 시대가 열리는 장대한 서사시.', 
+    cast:['로버트 다우니 주니어', '베네딕트 컴버배치', '톰 홀랜드'], color:'rgba(230,57,70,0.08)', stroke:'#E63946', 
+    poster:'https://images.unsplash.com/photo-1612036782180-6f0b6cd846fe?w=800&q=80',
+    ott:['Disney+'], ottReview:'"마블의 화려한 부활 예고"'
+  },
+  {
+    id:1, title:'더 배트맨 파트 2', genre:'action', genreLabel:'액션 · 범죄', year:2026, runtime:'175분', director:'맷 리브스', rating:9.2, badge:'UPCOMING', 
+    desc:'고담시의 어둠 속에 도사린 새로운 범죄의 기운. 브루스 웨인은 자신의 정의가 고담에 미치는 영향에 대해 고뇌하며, 더욱 깊고 치밀해진 범죄 조직과의 두뇌 싸움을 시작한다. 맷 리브스 감독 특유의 압도적인 분위기와 사실적인 액션이 한층 강화된 정통 누아르 히어로물.', 
+    cast:['로버트 패틴슨', '조이 크라비츠'], color:'rgba(201,195,184,0.06)', stroke:'#C9C3B8', 
+    poster:'https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=800&q=80',
+    ott:['Netflix', 'Apple TV+'], ottReview:'"최고의 누아르 히어로물"'
+  },
+  {
+    id:2, title:'스파이더맨: 비욘드 더 스파이더-버스', genre:'animation', genreLabel:'애니메이션 · SF', year:2026, runtime:'140분', director:'호아킴 도스 산토스', rating:9.6, badge:'UPCOMING', 
+    desc:'마일즈 모랄레스의 대장정이 막을 내린다. 수많은 멀티버스의 스파이더맨들과 함께 자신의 운명을 개척하고 사랑하는 사람들을 지키기 위한 마지막 사투를 벌인다. 애니메이션 역사상 전례 없는 화려한 영상미와 멀티버스 서사의 정점을 찍을 최종장.', 
+    cast:['샤메익 무어', '헤일리 스테인펠드'], color:'rgba(46,196,182,0.08)', stroke:'#2EC4B6', 
+    poster:'https://images.unsplash.com/photo-1635805737707-575885ab0820?w=800&q=80',
+    ott:['Netflix'], ottReview:'"애니메이션 역사를 새로 쓰다"'
+  },
+  {
+    id:3, title:'토이 스토리 5', genre:'animation', genreLabel:'애니메이션 · 코미디', year:2026, runtime:'105분', director:'앤드류 스탠튼', rating:9.0, badge:'UPCOMING', 
+    desc:'우디와 버즈가 다시 뭉쳤다! 새로운 주인과 환경 속에서 장난감의 존재 의미를 찾아가는 다섯 번째 여정. 디지털 시대의 새로운 장난감들과 경쟁하며 우정과 신뢰의 소중함을 다시 한번 일깨워주는, 아이와 어른 모두를 위한 가슴 뭉클한 감동 스토리.', 
+    cast:['톰 행크스', '팀 알렌'], color:'rgba(46,196,182,0.08)', stroke:'#2EC4B6', 
+    poster:'https://images.unsplash.com/photo-1594909122845-11baa439b7bf?w=800&q=80',
+    ott:['Disney+'], ottReview:'"가족 모두를 위한 완벽한 귀환"'
+  },
+  {
+    id:4, title:'프로젝트 하일메리', genre:'sci-fi', genreLabel:'SF · 드라마', year:2026, runtime:'150분', director:'필 로드', rating:9.5, badge:'HOT', 
+    desc:'앤디 위어의 베스트셀러 소설 전격 실사화! 지구의 멸망을 막기 위해 태양계 밖으로 홀로 떠난 과학자 라이언드. 기억을 잃은 채 깨어난 그는 우주선 안에서 미지의 외계 존재와 조우하게 된다. 인류를 구하기 위한 경이로운 여정과 종족을 초월한 감동적인 우정.', 
+    cast:['라이언 고슬링'], color:'rgba(244,162,97,0.08)', stroke:'#F4A261', 
+    poster:'https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=800&q=80',
+    ott:['Apple TV+'], ottReview:'"마션 그 이상의 우주 서사"'
+  },
+  {
+    id:5, title:'슈렉 5', genre:'animation', genreLabel:'애니메이션 · 코미디', year:2026, runtime:'110분', director:'월트 도른', rating:8.8, badge:'NEW', 
+    desc:'겁나 먼 왕국에 다시 평화가 찾아오는가? 슈렉과 피오나, 그리고 당나귀와 장화 신은 고양이의 더욱 유쾌하고 강력해진 모험. 고정관념을 뒤집는 슈렉 특유의 풍자와 웃음, 그리고 진정한 자아를 찾아가는 유쾌한 여정이 16년 만에 돌아온다.', 
+    cast:['마이크 마이어스', '에디 머피', '카메론 디아즈'], color:'rgba(46,196,182,0.06)', stroke:'#2EC4B6', 
+    poster:'https://images.unsplash.com/photo-1560169897-bb0c9148443f?w=800&q=80',
+    ott:['Netflix'], ottReview:'"추억과 재미를 모두 잡은 속편"'
+  },
+  {
+    id:6, title:'모아나 (실사)', genre:'action', genreLabel:'어드벤처 · 판타지', year:2026, runtime:'130분', director:'토마스 케일', rating:8.5, badge:'NEW', 
+    desc:'바다가 선택한 소녀 모아나와 전설의 영웅 마우이의 장엄한 모험이 실사 영상으로 재탄생한다. 폴리네시아의 아름다운 바다와 신화를 배경으로 펼쳐지는 가슴 벅찬 성장과 용기의 서사. 드웨인 존슨이 다시 한번 마우이로 분해 압도적인 스케일을 선사한다.', 
+    cast:['드웨인 존슨', '캐서린 라가아이아'], color:'rgba(230,57,70,0.06)', stroke:'#E63946', 
+    poster:'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=800&q=80',
+    ott:['Disney+'], ottReview:'"시각적 완성도가 뛰어난 실사화"'
+  },
+  {
+    id:7, title:'더 만달로리안 & 그로구', genre:'action', genreLabel:'SF · 액션', year:2026, runtime:'135분', director:'존 파브로', rating:9.1, badge:'UPCOMING', 
+    desc:'은하계를 누비는 만달로리안 딘 자린과 신비로운 아이 그로구의 새로운 여정. 제국 잔당들의 위협 속에서 그들의 유대감은 더욱 깊어지며, 스타워즈 세계관의 정수를 담은 화려한 광선검 액션과 우주 함대전이 스크린을 가득 채운다.', 
+    cast:['페드로 파스칼'], color:'rgba(201,195,184,0.06)', stroke:'#C9C3B8', 
+    poster:'https://images.unsplash.com/photo-1579546929518-9e396f3cc809?w=800&q=80',
+    ott:['Disney+'], ottReview:'"스타워즈 팬들을 위한 최고의 선물"'
+  },
+  {
+    id:8, title:'슈퍼걸: 우먼 오브 투모로우', genre:'action', genreLabel:'액션 · SF', year:2026, runtime:'140분', director:'크레이그 길레스피', rating:8.9, badge:'UPCOMING', 
+    desc:'슈퍼맨과는 또 다른 고통스러운 과거를 지닌 카라 조엘. 자신의 유산과 트라우마를 딛고 진정한 영웅으로 거듭나는 과정을 대담하고 강렬하게 그린다. DC 유니버스의 새로운 중심축이 될 기념비적인 여성 히어로 영화.', 
+    cast:['밀리 알콕'], color:'rgba(230,57,70,0.08)', stroke:'#E63946', 
+    poster:'https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?w=800&q=80',
+    ott:['Tving'], ottReview:'"DC 유니버스의 새로운 중심축"'
+  },
+  {
+    id:9, title:'슈퍼 마리오 브라더스 2', genre:'animation', genreLabel:'애니메이션 · 어드벤처', year:2026, runtime:'115분', director:'애런 호바스', rating:9.2, badge:'UPCOMING', 
+    desc:'버섯 왕국을 넘어 요시 아일랜드와 미지의 영토로! 마리오와 루이지가 더욱 강력해진 적 쿠파에 맞서 친구들과 함께 화려한 액션과 스피드를 선보인다. 닌텐도 월드를 완벽하게 구현한 환상적인 영상미와 숨겨진 이스터 에그들의 향연.', 
+    cast:['크리스 프랫', '찰리 데이', '아냐 테일러 조이'], color:'rgba(244,162,97,0.08)', stroke:'#F4A261', 
+    poster:'https://images.unsplash.com/photo-1566576721346-d4a3b4eaeb55?w=800&q=80',
+    ott:['Netflix'], ottReview:'"전작을 뛰어넘는 화려한 영상미"'
+  },
 ];
 
 const heroData = [
@@ -1652,9 +1702,11 @@ function buildCard(m, small=false){
       ${badgeHtml}
       <div class="poster-score">${m.rating}</div>
       <div class="poster-art">
-        <div class="poster-bg ${m.genre}">
-          <svg class="poster-icon" width="120" height="150" viewBox="0 0 120 150" fill="none">${posterSVG(m)}</svg>
-        </div>
+        ${m.poster ? `<img src="${m.poster}" alt="${m.title}" style="width:100%;height:100%;object-fit:cover;">` : `
+          <div class="poster-bg ${m.genre}">
+            <svg class="poster-icon" width="120" height="150" viewBox="0 0 120 150" fill="none">${posterSVG(m)}</svg>
+          </div>
+        `}
       </div>
       <div class="poster-overlay">
         <div class="overlay-actions">
@@ -1698,8 +1750,12 @@ function renderChart(){
     <div class="chart-item" onclick="openModal(${m.id})">
       <div class="chart-rank ${i<3?'top3':''}">${String(i+1).padStart(2,'0')}</div>
       <div class="chart-thumb">
-        <div class="chart-thumb-inner poster-bg ${m.genre}" style="display:flex;align-items:center;justify-content:center">
-          <svg width="40" height="50" viewBox="0 0 120 150" fill="none" opacity="0.5">${posterSVG(m)}</svg>
+        <div class="chart-thumb-inner">
+          ${m.poster ? `<img src="${m.poster}" alt="${m.title}" style="width:100%;height:100%;object-fit:cover;">` : `
+            <div class="poster-bg ${m.genre}" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center">
+              <svg width="40" height="50" viewBox="0 0 120 150" fill="none" opacity="0.5">${posterSVG(m)}</svg>
+            </div>
+          `}
         </div>
       </div>
       <div class="chart-info">
@@ -1742,8 +1798,14 @@ function openModal(id){
   const m = movies[id];
   if(!m)return;
   const bgColors = {'sci-fi':'linear-gradient(160deg,#050A1A 0%,#0D1A3D 100%)','action':'linear-gradient(160deg,#1A0A0A 0%,#2D1515 100%)','drama':'linear-gradient(160deg,#0A0A15 0%,#15152D 100%)','thriller':'linear-gradient(160deg,#050505 0%,#151515 100%)','romance':'linear-gradient(160deg,#1A0A0F 0%,#2D1520 100%)','comedy':'linear-gradient(160deg,#0A1200 0%,#152000 100%)','horror':'linear-gradient(160deg,#060200 0%,#100800 100%)','animation':'linear-gradient(160deg,#001A1A 0%,#002D2D 100%)'};
-  document.getElementById('modalPosterBg').style.background = bgColors[m.genre]||bgColors.drama;
-  document.getElementById('modalPosterBg').innerHTML = `<svg width="100" height="140" viewBox="0 0 120 150" fill="none" opacity="0.35">${posterSVG(m)}</svg>`;
+  const pBox = document.getElementById('modalPosterBg');
+  if(m.poster){
+    pBox.style.background = `url(${m.poster}) center/cover no-repeat`;
+    pBox.innerHTML = '';
+  } else {
+    pBox.style.background = bgColors[m.genre]||bgColors.drama;
+    pBox.innerHTML = `<svg width="100" height="140" viewBox="0 0 120 150" fill="none" opacity="0.35">${posterSVG(m)}</svg>`;
+  }
   document.getElementById('modalGenre').textContent = m.genreLabel;
   document.getElementById('modalTitle').textContent = m.title;
   document.getElementById('modalScore').textContent = `★ ${m.rating}`;
