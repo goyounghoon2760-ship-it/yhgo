@@ -1321,7 +1321,7 @@ footer {
 </section>
 
 <!-- ═══════════════ FILTER ═══════════════ -->
-<div class="filter-section">
+<div class="filter-section" id="filterSection" style="scroll-margin-top: 80px;">
   <div class="filter-row">
     <span class="filter-label">장르</span>
     <button class="filter-btn active" onclick="setFilter(this,'all')">전체</button>
@@ -1369,7 +1369,10 @@ footer {
   </div>
 </div>
 
-
+<!-- ═══════════════ MOVIE GRID ═══════════════ -->
+<section class="section" id="movies">
+  <div class="movie-grid reveal" id="movieGrid"></div>
+</section>
 
 <!-- ═══════════════ EDITORIAL ═══════════════ -->
 <section class="section section-alt">
@@ -1419,7 +1422,19 @@ footer {
       <div class="section-eyebrow"><div class="eyebrow-line"></div><span>Naver Trend</span></div>
       <h2 class="section-title">네이버 인기 랭킹</h2>
     </div>
-    <button class="view-all">전체 랭킹 →</button>
+    <div style="display:flex; gap:20px; align-items:center;">
+      <div class="sort-wrap">
+        <select class="sort-select" onchange="renderChart(this.value)">
+          <option value="all" style="color:#000;">전체 OTT</option>
+          <option value="Netflix" style="color:#000;">넷플릭스</option>
+          <option value="Disney+" style="color:#000;">디즈니+</option>
+          <option value="Apple TV+" style="color:#000;">애플 TV+</option>
+          <option value="Tving" style="color:#000;">티빙</option>
+          <option value="Coupang Play" style="color:#000;">쿠팡플레이</option>
+        </select>
+      </div>
+      <button class="view-all">전체 랭킹 →</button>
+    </div>
   </div>
   <div class="top-chart reveal" id="chartList"></div>
 </section>
@@ -1760,9 +1775,13 @@ function renderGrid(){
   grid.innerHTML = list.length ? list.map(m=>buildCard(m)).join('') : `<div style="grid-column:1/-1;text-align:center;padding:60px;color:var(--muted)">검색 결과가 없습니다.</div>`;
 }
 
-function renderChart(){
-  const sorted = [...movies].sort((a,b)=>b.rating-a.rating).slice(0,8);
-  document.getElementById('chartList').innerHTML = sorted.map((m,i)=>`
+function renderChart(ottFilter = 'all'){
+  let list = [...movies];
+  if(ottFilter !== 'all') list = list.filter(m => m.ott.includes(ottFilter));
+  const sorted = list.sort((a,b)=>b.rating-a.rating).slice(0,8);
+  const chartEl = document.getElementById('chartList');
+  if(!sorted.length) { chartEl.innerHTML = '<div style="text-align:center;padding:40px;color:var(--muted);width:100%">해당 OTT의 인기작이 없습니다.</div>'; return; }
+  chartEl.innerHTML = sorted.map((m,i)=>`
     <div class="chart-item" onclick="openModal(${m.id})">
       <div class="chart-rank ${i<3?'top3':''}">${String(i+1).padStart(2,'0')}</div>
       <div class="chart-thumb">
@@ -1809,7 +1828,7 @@ function setFilterDirect(f){
     b.classList.toggle('active', b.textContent.toLowerCase()===genreMap[f]);
   });
   renderGrid();
-  document.getElementById('chart').scrollIntoView({behavior:'smooth'});
+  document.getElementById('filterSection').scrollIntoView({behavior:'smooth', block:'start'});
 }
 const genreMap={'action':'액션','sci-fi':'sf','drama':'드라마','thriller':'스릴러','romance':'로맨스','comedy':'코미디','horror':'공포','animation':'애니메이션'};
 function sortMovies(v){currentSort=v;renderGrid();}

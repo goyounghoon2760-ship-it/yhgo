@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 8080;
 
 // Set up EJS
 app.set('view engine', 'ejs');
-app.set('views', path.join(process.cwd(), 'views'));
+app.set('views', path.join(__dirname, 'views'));
 
 // Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
